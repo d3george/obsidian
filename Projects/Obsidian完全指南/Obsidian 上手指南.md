@@ -27,9 +27,11 @@ tags:
 1. 切换 edit/preview 模式 `cmd+ e`
 2. 增加属性 `cmd + ;`
 3. 文件内搜索 `cmd + f`
+4. [ ] 生成   `cmd + l`
 
 ## 插件管理
 
+### Obsidian插件
 - [Notebook Navigator]() 目录文本导航器
 	- Notebook Navigator:打开: `cmd + shift + e`
 - [Omnisearch]() 搜索工具,  设置下面两个快捷键替换内置的搜索快捷键
@@ -41,6 +43,12 @@ tags:
 	- **批量处理**: 将整个库/指定目录/单文件内的附件按配置规则移动并重命名. 一键整理的福音；
 	- **自动处理更新**: 笔记重命名，笔记移动，文件重命名会自动更新关联， 这个自动更新功能太强了，其他插件会存在引用失效问题
 + [Image Converter](https://github.com/xRyul/obsidian-image-converter) 自动处理图片粘贴时的自动命名，图片存储位置以笔记名为文件夹名称，也支持手动更新文件名称
++ [obsidian-git](obsidian://show-plugin?id=obsidian-git) : 数据同步
+### 浏览器插件
+- [Obsidian Web Clipper](https://obsidian.md/clipper) : 一键捕获网页内容并导入 Obsidian
 
 ## 附件管理
-[[obsidian 附件管理最佳实践]]
+[[Obsidian 附件管理最佳实践]]
+
+## 同步管理
+[[Obsidian 云端同步最佳方案]]
