@@ -1,0 +1,74 @@
+---
+alwaysApply: true
+---
+
+# 知识库组织结构规则
+
+## 目录结构 (PARA 方法)
+
+本知识库使用 PARA 方法组织，包含以下顶级目录：
+
+- `Inbox` - 收件箱：临时笔记，需要定期清理和处理
+- `Projects` - 项目：正在积极推进、有明确截止日期的工作
+- `Areas` - 领域：长期负责、没有固定终点的领域
+- `Resources` - 资源：个人知识库和数字花园
+  - `Topics/` - 技术主题（概念驱动）
+  - `Sources/` - 原始材料（可选）
+    - `Books/` - 读书笔记
+    - `Videos/` - 视频概要
+    - `Articles/` - 文章总结
+- `Archive` - 归档：已完成的项目、不再相关的领域、过时的资源
+- `Templates` - 模板
+
+## 标签系统
+
+标签使用前缀系统，不应重复目录名：
+
+### type/ (笔记类型)
+- `type/concept` - 原子化概念笔记
+- `type/summary` - 摘要（书籍、文章、视频）
+- `type/snippet` - 代码片段
+- `type/cheatsheet` - 速查表
+- `type/meeting` - 会议纪要
+- `type/question` - 问题（未解决）
+- `type/insight` - 个人见解
+
+### status/ (工作流状态)
+- `status/todo` - 待办
+- `status/in-progress` - 进行中
+- `status/waiting` - 等待
+- `status/done` - 已完成
+- `status/review` - 待复习
+
+### source/ (信息来源)
+- `source/book`
+- `source/article`
+- `source/video`
+- `source/podcast`
+- `source/course`
+- `source/conversation`
+
+### topic/ (跨领域主题)
+用于横跨多个领域或太小不值得创建目录的主题
+
+## Zettelkasten 原则
+
+1. **概念驱动**：知识库以概念为核心，而非来源
+2. **原子化**：每个概念一个笔记
+3. **双向链接**：使用 `[[笔记名]]` 创建链接
+4. **来源追溯**：概念笔记应链接回原始来源
+
+## 工作流程
+
+1. **捕获** → `Inbox`（快速记录）
+2. **整理** → 移动到相应目录并添加标签
+3. **提炼** → 从来源笔记中提取概念，创建原子笔记
+4. **关联** → 使用双向链接连接相关笔记
+5. **应用** → 在项目笔记中引用概念笔记
+
+## 搜索和检索指南
+
+- 使用目录结构查找特定类型的笔记
+- 使用标签进行跨目录的主题聚合
+- 使用双向链接追踪概念之间的关系
+- 优先在 `Resources/Topics/` 中查找概念笔记
