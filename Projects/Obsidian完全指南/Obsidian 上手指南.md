@@ -57,4 +57,4 @@ tags:
 [[Obsidian 云端同步最佳方案]]
 
 ## Base 数据库
-[[Obsidian Bases + Web Clipper 📝 The Perfect Research & Learning Pair]]
+[[📺-Obsidian Bases + Web Clipper 📝 The Perfect Research & Learning Pair]]
