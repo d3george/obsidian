@@ -47,8 +47,14 @@ tags:
 ### 浏览器插件
 - [Obsidian Web Clipper](https://obsidian.md/clipper) : 一键捕获网页内容并导入 Obsidian
 
+## 如何组织目录与标签
+[[PARA 方法 +Zettelkasten（卡片盒笔记法）]]
+
 ## 附件管理
 [[Obsidian 附件管理最佳实践]]
 
 ## 同步管理
 [[Obsidian 云端同步最佳方案]]
+
+## Base 数据库
+[[Obsidian Bases + Web Clipper 📝 The Perfect Research & Learning Pair]]

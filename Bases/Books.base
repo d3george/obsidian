@@ -1,0 +1,23 @@
+model:
+  version: 1
+  kind: Table
+  columns: []
+pluginVersion: 1.0.0
+filters:
+  and:
+    - file.tags.contains("source/book")
+    - file.folder != "Templates"
+views:
+  - type: cards
+    name: 卡片
+    order:
+      - file.name
+      - author
+    cardSize: 250
+    image: note.cover
+    imageFit: contain
+    imageAspectRatio: 1
+  - type: table
+    name: 表格
+  - type: table
+    name: 视图
