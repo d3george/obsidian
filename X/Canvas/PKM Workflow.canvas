@@ -10,11 +10,11 @@
 		{"id":"4a252e7d7e21c5b5","type":"text","text":" `Project_A_Backend_Refactor` (项目A的后端重构)","x":127,"y":647,"width":457,"height":50},
 		{"id":"a88f749f52db3842","type":"text","text":" `Learn_Kubernetes_Sprint` (K8s 学习冲刺 - 把它当做一个有始有终的项目)","x":127,"y":725,"width":457,"height":62},
 		{"id":"00928fe3e79aafc3","type":"text","text":"`Blog_Post_Go_Concurrency` (要写的博客文章)","x":127,"y":822,"width":457,"height":50},
+		{"id":"a2cb431a1f4b20bc","type":"text","text":"# Archive\n* **用途**: “冷藏库”。所有已完成的项目、不再相关的领域、过时的资源，都移到这里。\n* **规则**: 只进不出。这能让你的 `Projects` 和 `Areas` 保持清爽。","x":337,"y":1120,"width":495,"height":200,"color":"1"},
 		{"id":"3631e9a0ef3f88b4","type":"text","text":"# Areas\n**用途**: 存放你**长期负责、没有固定终点**的领域。这是你“保持标准”的地方。","x":700,"y":701,"width":420,"height":120},
 		{"id":"494501d1843acdac","type":"text","text":" `Finance` (预算、投资理念)","x":1231,"y":793,"width":368,"height":50},
 		{"id":"030e10ec9110fcdb","type":"text","text":" `Work` (存放会议纪要、周报、团队标准)","x":1234,"y":676,"width":365,"height":50},
 		{"id":"88e48a19b64f27c4","type":"text","text":"`Finance` (预算、投资理念)","x":1234,"y":733,"width":365,"height":50},
-		{"id":"a2cb431a1f4b20bc","type":"text","text":"# Archive\n* **用途**: “冷藏库”。所有已完成的项目、不再相关的领域、过时的资源，都移到这里。\n* **规则**: 只进不出。这能让你的 `Projects` 和 `Areas` 保持清爽。","x":337,"y":1120,"width":495,"height":200,"color":"1"},
 		{"id":"dd6eb88224891af7","type":"text","text":"# Projects\n**用途**: 存放你**正在积极推进**、**有明确截止日期**的工作。","x":-400,"y":696,"width":420,"height":120}
 	],
 	"edges":[
@@ -26,7 +26,7 @@
 		{"id":"0efaf7699ef0f73a","fromNode":"3631e9a0ef3f88b4","fromSide":"right","toNode":"494501d1843acdac","toSide":"left"},
 		{"id":"a75a0b83d629d386","fromNode":"bada58f7e76eb1c7","fromSide":"right","toNode":"4d033d71ac8aebdc","toSide":"left","color":"3"},
 		{"id":"3632fb3e3150d389","fromNode":"bada58f7e76eb1c7","fromSide":"right","toNode":"efa1402df72479ef","toSide":"left","color":"3"},
-		{"id":"c3072d0337acb7ee","fromNode":"dd13ed59bd95ecc9","fromSide":"bottom","toNode":"d8333bfc0318b13c","toSide":"top"},
+		{"id":"c3072d0337acb7ee","fromNode":"dd13ed59bd95ecc9","fromSide":"bottom","toNode":"d8333bfc0318b13c","toSide":"top","label":"NotebookLM"},
 		{"id":"3c4a26c09ee0adf8","fromNode":"d8333bfc0318b13c","fromSide":"bottom","toNode":"93522c0073d6b024","toSide":"top"},
 		{"id":"b551eb6cdfc1ccc7","fromNode":"d8333bfc0318b13c","fromSide":"bottom","toNode":"a20957d7c2ce3125","toSide":"top"},
 		{"id":"d42f5f49840c1b7f","fromNode":"93522c0073d6b024","fromSide":"bottom","toNode":"a2cb431a1f4b20bc","toSide":"top"},

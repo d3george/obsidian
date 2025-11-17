@@ -4,6 +4,9 @@ tags:
   - type/summary
   - status/done
 ---
+## Markdown语法
+1. [Markdown Cheat Sheet](https://www.markdownguide.org/cheat-sheet/)
+
 ## 设置
 ### 核心插件
 1. 标签列表(开启)

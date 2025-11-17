@@ -5,7 +5,7 @@ tags:
   - topic/tools/obsidian
 ---
 
-[[PKM Workfolw.canvas|PKM Workfolw]]
+[[PKM Workflow.canvas|PKM Workfolw]]
 作为软件开发者，我们的知识输入源多、杂，且需要快速迭代和关联。Obsidian 的强大之处在于它的双向链接，但一个清晰的组织结构能让它发挥十倍的威力。
 
 我们需要的不是一个“绝对”的系统，而是一个“**可演进、高弹性**”的系统。我推荐一套结合了 **PARA 方法** 和 **Zettelkasten（卡片盒笔记法）** 思想的混合系统。
