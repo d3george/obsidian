@@ -1,6 +1,6 @@
 {
 	"nodes":[
-		{"id":"d8333bfc0318b13c","type":"group","x":40,"y":0,"width":1015,"height":420,"color":"3"},
+		{"id":"d8333bfc0318b13c","type":"group","x":40,"y":20,"width":995,"height":400,"color":"3"},
 		{"id":"93522c0073d6b024","type":"group","x":-440,"y":627,"width":1044,"height":265},
 		{"id":"a20957d7c2ce3125","type":"group","x":680,"y":627,"width":939,"height":265},
 		{"id":"4d033d71ac8aebdc","type":"text","text":"* `Topics` (技术主题):\n    * `Programming/GoLang/`\n    * `Programming/Python/`\n    * `DevOps/Kubernetes/`\n    * `Database/PostgreSQL/`\n    * `Concepts/System_Design/`","x":620,"y":20,"width":415,"height":184,"color":"3"},
@@ -27,9 +27,9 @@
 		{"id":"a75a0b83d629d386","fromNode":"bada58f7e76eb1c7","fromSide":"right","toNode":"4d033d71ac8aebdc","toSide":"left","color":"3"},
 		{"id":"3632fb3e3150d389","fromNode":"bada58f7e76eb1c7","fromSide":"right","toNode":"efa1402df72479ef","toSide":"left","color":"3"},
 		{"id":"c3072d0337acb7ee","fromNode":"dd13ed59bd95ecc9","fromSide":"bottom","toNode":"d8333bfc0318b13c","toSide":"top","label":"NotebookLM"},
-		{"id":"3c4a26c09ee0adf8","fromNode":"d8333bfc0318b13c","fromSide":"bottom","toNode":"93522c0073d6b024","toSide":"top"},
-		{"id":"b551eb6cdfc1ccc7","fromNode":"d8333bfc0318b13c","fromSide":"bottom","toNode":"a20957d7c2ce3125","toSide":"top"},
-		{"id":"d42f5f49840c1b7f","fromNode":"93522c0073d6b024","fromSide":"bottom","toNode":"a2cb431a1f4b20bc","toSide":"top"},
-		{"id":"ae6d20225a9eddc1","fromNode":"a20957d7c2ce3125","fromSide":"bottom","toNode":"a2cb431a1f4b20bc","toSide":"top"}
+		{"id":"3c4a26c09ee0adf8","fromNode":"d8333bfc0318b13c","fromSide":"bottom","toNode":"93522c0073d6b024","toSide":"top","label":"引用资源"},
+		{"id":"b551eb6cdfc1ccc7","fromNode":"d8333bfc0318b13c","fromSide":"bottom","toNode":"a20957d7c2ce3125","toSide":"top","label":"引用资源"},
+		{"id":"d42f5f49840c1b7f","fromNode":"93522c0073d6b024","fromSide":"bottom","toNode":"a2cb431a1f4b20bc","toSide":"top","label":"项目结束"},
+		{"id":"ae6d20225a9eddc1","fromNode":"a20957d7c2ce3125","fromSide":"bottom","toNode":"a2cb431a1f4b20bc","toSide":"top","label":"相关领域归档"}
 	]
 }

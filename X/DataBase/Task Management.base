@@ -1,0 +1,11 @@
+model:
+  version: 1
+  kind: Table
+  columns: []
+pluginVersion: 1.0.0
+views:
+  - type: list
+    name: Todo
+    filters:
+      and:
+        - file.tags.contains("status/todo")

@@ -1,6 +1,5 @@
 ---
 tags:
-  - status/todo
   - source/article
   - type/summary
   - topic/tools/obsidian
