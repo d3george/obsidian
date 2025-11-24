@@ -1,6 +1,6 @@
 {
 	"nodes":[
-		{"id":"d8333bfc0318b13c","type":"group","x":40,"y":20,"width":995,"height":400,"color":"3"},
+		{"id":"d8333bfc0318b13c","type":"group","x":40,"y":0,"width":1020,"height":420,"color":"3"},
 		{"id":"93522c0073d6b024","type":"group","x":-440,"y":627,"width":1044,"height":265},
 		{"id":"a20957d7c2ce3125","type":"group","x":680,"y":627,"width":939,"height":265},
 		{"id":"4d033d71ac8aebdc","type":"text","text":"* `Topics` (技术主题):\n    * `Programming/GoLang/`\n    * `Programming/Python/`\n    * `DevOps/Kubernetes/`\n    * `Database/PostgreSQL/`\n    * `Concepts/System_Design/`","x":620,"y":20,"width":415,"height":184,"color":"3"},

@@ -1,13 +1,12 @@
 ---
 title: "How Git Works: Explained in 4 Minutes"
-source: "https://www.youtube.com/watch?v=e9lnsKot_SQ"
+source: https://www.youtube.com/watch?v=e9lnsKot_SQ
 tags:
-  - "source/video"
-  - "status/todo"
-cover: "https://www.youtube.com/img/desktop/yt_1200.png"
+  - source/video
+cover: https://www.youtube.com/img/desktop/yt_1200.png
 author:
-  - "ByteByteGo"
-keywords: "视频, video, 分享, sharing, 拍照手机, camera phone, 视频手机, video phone, 免费, free, 上传, upload"
+  - ByteByteGo
+keywords: 视频, video, 分享, sharing, 拍照手机, camera phone, 视频手机, video phone, 免费, free, 上传, upload
 ---
 ```vid
 https://www.youtube.com/watch?v=e9lnsKot_SQ
