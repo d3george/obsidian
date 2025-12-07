@@ -28,13 +28,13 @@ AuthorUrl: https://www.youtube.com/@ByteMonk
 
 ### 📋 Quick Reference
 
-| 原则 | 英文全称 | 核心思想 |
-|:---:|:---|:---|
-| **S** | Single Responsibility | 一个类只做一件事 |
-| **O** | Open/Closed | 对扩展开放，对修改关闭 |
-| **L** | Liskov Substitution | 子类可无缝替换父类 |
-| **I** | Interface Segregation | 接口要小而专一 |
-| **D** | Dependency Inversion | 依赖抽象，不依赖具体 |
+|  原则   | 英文全称                  | 核心思想        |
+| :---: | :-------------------- | :---------- |
+| **S** | Single Responsibility | 一个类只做一件事    |
+| **O** | Open/Closed           | 对扩展开放，对修改关闭 |
+| **L** | Liskov Substitution   | 子类可无缝替换父类   |
+| **I** | Interface Segregation | 接口要小而专一     |
+| **D** | Dependency Inversion  | 依赖抽象，不依赖具体  |
 
 ---
 
