@@ -8,7 +8,7 @@ author:
 cover: "https://chrome.dev/css-wrapped-2025/social.jpg"
 words: 4759
 ---
-![Monster guy fiddling in their workshop making a robot](https://chrome.dev/css-wrapped-2025/biomes/components-header.jpg)
+![Monster guy fiddling in their workshop making a robot|700x658](https://chrome.dev/css-wrapped-2025/biomes/components-header.jpg)
 
 ### Invoker Commands
 

@@ -3,6 +3,7 @@ title: Obsidian Bases + Web Clipper 📝 The Perfect Research & Learning Pair
 source: https://www.youtube.com/watch?v=AvliytN6xKU
 tags:
   - source/video
+  - topic/tools/obsidian
 cover: https://i.ytimg.com/vi/AvliytN6xKU/maxresdefault.jpg
 author:
   - Wanderloots
