@@ -74,6 +74,10 @@ AuthorUrl: https://www.youtube.com/@nicksaraev
 **总结建议：**
 Nick 强调，生产力的目的不是为了完成更多的待办事项，而是为了用最少的移动（位移）赚取最多的收益。优先优化你的环境和核心任务，而不是迷信意志力。
 
+## 相关概念
+
+- [[距离与位移]]
+
 ---
 
 ## AI 分析 (Processed by Cursor)
