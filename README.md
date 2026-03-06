@@ -30,6 +30,36 @@
 2. **检索与关联**：直接在 Cursor Chat 中提问（如「知识库中与并发相关的笔记有哪些？」），或使用 Obsidian 内 Smart Connections 做语义关联。
 3. **笔记质量**：编辑后 AI 会按 `note-quality.mdc` 自动考虑原子性、链接与标签；无需单独命令。
 
+## 整体流程（优化后）
+
+```mermaid
+flowchart TB
+  subgraph capture [1. 捕获]
+    A1["浏览器 → Obsidian Web Clipper"]
+    A2["Cursor + Firecrawl Skill"]
+    A1 -->|自动到 Inbox| inbox[Inbox/*.md]
+    A2 -->|抓取为 MD| inbox
+  end
+
+  subgraph processStep [2. 加工]
+    inbox -->|一条命令| pipeline["process-inbox-notes"]
+    inbox -->|深度分析| nlm["NotebookLM"]
+    nlm -->|Chrome 扩展导出 MD| inbox
+  end
+
+  subgraph organizeStep [3. 整理]
+    pipeline --> org["organize-note"]
+    pipeline -->|有概念值得沉淀| ext["extract-and-create-concepts"]
+    ext --> org
+    org --> done["PARA 目录 + 标签 + 链接"]
+  end
+
+  subgraph discoverStep [4. 关联与发现]
+    done --> sc["Smart Connections"]
+    done --> cursor_chat["Cursor Chat"]
+  end
+```
+
 ## 可选增强（按需）
 
 - **Skills**：Firecrawl（网页抓取为 Markdown 进 Inbox）、find-skills（发现更多 Skill）已安装则可在 Chat 中直接使用。
