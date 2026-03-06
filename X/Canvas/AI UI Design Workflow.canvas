@@ -1,0 +1,13 @@
+{
+	"nodes":[
+		{"id":"09c89aa5670b5cd9","type":"text","text":"使用 [Firecrawl](https://www.firecrawl.dev/) 抓取某个网站的 Brand 设计","x":-1380,"y":-920,"width":265,"height":88},
+		{"id":"0cc4f7bb528d5187","type":"file","file":"X/Canvas/assets/AI UI Design Workflow/file-20251228181230863.jpg","x":-1447,"y":-740,"width":400,"height":362},
+		{"id":"8a4b67a4a5e8bdfb","type":"file","file":"Resources/Topics/AI/ prompt/Brand Guidelines Prompt.md","x":-920,"y":-593,"width":280,"height":69},
+		{"id":"e1aaa15181adc70c","type":"text","text":"[Stitch](https://stitch.withgoogle.com)","x":-500,"y":-589,"width":250,"height":60}
+	],
+	"edges":[
+		{"id":"2a9383e9784c0fd2","fromNode":"09c89aa5670b5cd9","fromSide":"bottom","toNode":"0cc4f7bb528d5187","toSide":"top"},
+		{"id":"b6d304733213ec2a","fromNode":"0cc4f7bb528d5187","fromSide":"right","toNode":"8a4b67a4a5e8bdfb","toSide":"left"},
+		{"id":"7523836da89f2b2e","fromNode":"8a4b67a4a5e8bdfb","fromSide":"right","toNode":"e1aaa15181adc70c","toSide":"left"}
+	]
+}
