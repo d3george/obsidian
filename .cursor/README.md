@@ -30,8 +30,18 @@
 2. **检索与关联**：直接在 Cursor Chat 中提问（如「知识库中与并发相关的笔记有哪些？」），或使用 Obsidian 内 Smart Connections 做语义关联。
 3. **笔记质量**：编辑后 AI 会按 `note-quality.mdc` 自动考虑原子性、链接与标签；无需单独命令。
 
+## 可选增强（按需）
+
+- **Skills**：Firecrawl（网页抓取为 Markdown 进 Inbox）、find-skills（发现更多 Skill）已安装则可在 Chat 中直接使用。
+- **Obsidian MCP**：已配置于 `.cursor/mcp.json`，Cursor 可主动搜索/创建/更新笔记；修改库路径请编辑该文件中 `args` 的最后一格。
+
+## 第三层进阶（按需）
+
+- 将 Vault 特定目录（如 `Resources/Topics/`）通过 obs2nlm 或 PDF 导出喂给 NotebookLM，做主题级深度研究。
+- 探索「主动推送」：如 Smart Connections 的定期回顾、Nowledge Mem 等，用于复习与发现关联。
+
 ## 提示
 
 - 规则会自动应用；命令可通过 `@命令名` 或自然语言触发。
 - 概念笔记优先放在 `Resources/Topics/` 下对应领域目录。
-- 建议在仓库根目录创建 `.cursorignore`，排除 `.obsidian/`、`.trash/`、`assets/` 等，减少 AI 索引无关内容。若未创建，可手动添加上述路径。
+- 仓库根目录已有 `.cursorignore`，排除 `.obsidian/`、`.trash/`、`assets/` 等，减少 AI 索引无关内容。
