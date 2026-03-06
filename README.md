@@ -5,7 +5,7 @@
 ## 规则文件
 
 - **`.cursor/rules/knowledge-base-structure.mdc`**：目录结构（PARA）、标签系统、Zettelkasten 原则、工作流程。Cursor 会自动应用。
-- **`.cursor/rules/note-quality.mdc`**：笔记质量标准（原子性、链接性、标签、结构、位置）。编辑笔记时 AI 会参考。
+- **`.cursor/rules/note-quality.mdc`**：笔记质量标准（原子性、链接性、标签、结构、位置、文风约定）。编辑笔记时 AI 会参考。
 
 ## 可用命令（3 个）
 
