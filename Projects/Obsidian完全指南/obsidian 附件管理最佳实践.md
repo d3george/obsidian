@@ -2,7 +2,7 @@
 tags:
   - source/article
   - type/summary
-  - topic/tools/obsidian
+  - topic/obsidian
 uploaded: 2025-11-10
 url: https://xtoolism.github.io/xtool/Obsidian/obsidian-%E9%99%84%E4%BB%B6%E7%AE%A1%E7%90%86%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5
 ---

@@ -2,7 +2,7 @@
 title: "The Art of Focus: Find Meaning, Reinvent Yourself and C…"
 source: "https://www.goodreads.com/book/show/204169121-the-art-of-focus?from_search=true&from_srp=true&qid=7f3oQ5jppo&rank=1"
 tags:
-  - "source/book"
+  - source/book
 cover: "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1703091499i/204169121.jpg"
 author:
   - "Dan  Koe"

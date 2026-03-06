@@ -2,7 +2,7 @@
 tags:
   - status/done
   - type/summary
-  - topic/tools/obsidian
+  - topic/obsidian
 ---
 
 [[PKM Workflow.canvas|PKM Workfolw]]

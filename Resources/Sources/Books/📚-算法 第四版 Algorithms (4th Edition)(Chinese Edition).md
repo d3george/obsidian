@@ -1,7 +1,7 @@
 ---
 title: "算法 第四版 Algorithms (4th Edition)(Chinese Edition)"
 tags:
-  - "source/book"
+  - source/book
 author:
   - "(美)Robert Sedgewick，(美)Kevin Wayne著 ; 谢路云译"
 source: "https://zh.z-library.sk/book/11731443/4540c1/%E7%AE%97%E6%B3%95-%E7%AC%AC%E5%9B%9B%E7%89%88-algorithms-4th-editionchinese-edition.html"

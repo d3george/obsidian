@@ -1,0 +1,14 @@
+# Obsidian 配置与缓存
+.obsidian/
+.trash/
+
+# 媒体与附件
+assets/
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.webp
+*.pdf
+*.mp4
+*.webm

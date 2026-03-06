@@ -2,8 +2,8 @@
 title: "macOS Ricing for Power Users - Yabai, SketchyBar, Fastfetch, Tmux and More"
 source: "https://www.youtube.com/watch?v=8pqFtkQip4I"
 tags:
-  - "source/video"
-  - "status/todo"
+  - source/video
+  - status/todo
 cover: "https://www.youtube.com/img/desktop/yt_1200.png"
 author:
   - "linkarzu"

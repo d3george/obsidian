@@ -2,8 +2,8 @@
 title: "How Git Works Internally"
 source: "https://blog.algomaster.io/p/how-git-works-internally"
 tags:
-  - "source/article"
-  - "status/todo"
+  - source/article
+  - status/todo
 author:
   - "Ashish Pratap Singh"
 cover: "https://substackcdn.com/image/fetch/$s_!LSMI!,w_1200,h_675,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb8363fed-dc7e-4f8b-bf3f-756841964c63_685x532.png"

@@ -2,8 +2,8 @@
 title: "How I Got Ahead of 99% of Software Engineers"
 source: "https://www.youtube.com/watch?v=2aldTxnbNt0&t=8419s"
 tags:
-  - "source/video"
-  - "status/todo"
+  - source/video
+  - status/todo
 cover: "https://i.ytimg.com/vi/pksTiyUjwsU/maxresdefault.jpg"
 author:
   - "Riley Brown"

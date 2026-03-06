@@ -1,6 +1,6 @@
 ---
 tags:
-  - topic/tools/obsidian
+  - topic/obsidian
   - type/summary
   - status/done
 ---

@@ -1,7 +1,7 @@
 ---
 tags:
   - type/summary
-  - topic/tools/obsidian
+  - topic/obsidian
   - status/done
 url: https://xtoolism.github.io/xtool/Obsidian/Obsidian-%E6%96%B0%E6%89%8B%E5%BF%85%E7%9C%8B%EF%BC%9A%E7%94%A8-Git-%E6%90%AD%E5%BB%BA%E5%A4%9A%E7%AB%AF%E5%90%8C%E6%AD%A5%E7%9F%A5%E8%AF%86%E5%BA%93%EF%BC%8C%E6%9E%81%E9%80%9F%E6%9B%B4%E6%96%B0%EF%BC%8B%E5%AE%89%E5%85%A8%E5%9B%9E%E6%BB%9A
 ---

@@ -1,116 +1,37 @@
 # Cursor 知识库助手使用指南
 
-本知识库已配置了 PARA + Zettelkasten 方法的规则和命令，帮助您更高效地管理和检索笔记。
+本知识库已配置 PARA + Zettelkasten 规则与精简命令，便于在 Cursor 内完成捕获、加工与整理。
 
-## 📋 规则文件
+## 规则文件
 
-### `.cursor/rules/knowledge-base-structure.md`
-定义了知识库的组织结构、标签系统和 Zettelkasten 原则。Cursor 会自动应用这些规则来理解您的知识库。
+- **`.cursor/rules/knowledge-base-structure.mdc`**：目录结构（PARA）、标签系统、Zettelkasten 原则、工作流程。Cursor 会自动应用。
+- **`.cursor/rules/note-quality.mdc`**：笔记质量标准（原子性、链接性、标签、结构、位置）。编辑笔记时 AI 会参考。
 
-## 🛠️ 可用命令
+## 可用命令（3 个）
 
 ### 1. `process-inbox-notes`
-**用途**：处理收件箱中的笔记，生成结构化分析
+**用途**：处理收件箱中的笔记，生成结构化分析（Summary / Key Takeaway / Something New），并追加到文末。
 
-**使用方法**：
-- 打开 `Inbox` 中的笔记
-- 在 Cursor 中使用此命令
-- 会自动生成摘要、要点和新见解
+**使用**：打开 `Inbox` 中的笔记，在 Cursor 中调用此命令或让 AI「处理这篇 Inbox 笔记」。
 
-### 2. `create-concept-note`
-**用途**：创建原子化的概念笔记
+### 2. `extract-and-create-concepts`
+**用途**：从当前摘要笔记中识别核心概念，为每个概念创建或更新原子笔记，并在原笔记中添加「相关概念」链接。一步完成识别 → 创建/更新 → 链接。
 
-**使用场景**：
-- 学习到新概念需要记录
-- 从来源笔记中提炼概念
+**使用**：在已分析的摘要笔记上调用，或说「从这篇笔记提取概念并创建概念笔记」。
 
-**示例**：
-```
-@create-concept-note 概念名：Goroutines，领域：GoLang，描述：Go 语言的轻量级线程
-```
+### 3. `organize-note`
+**用途**：根据 PARA 与标签规则，建议目标目录、应加标签、可建链接；必要时建议移动位置。
 
-### 3. `extract-concepts-from-note`
-**用途**：从摘要笔记中提取概念并创建独立笔记
+**使用**：对 Inbox 或未分类笔记调用，或说「整理当前笔记到合适目录并打 tag」。
 
-**使用场景**：
-- 有一篇读书笔记或视频总结
-- 需要将其中的概念提炼成独立笔记
+## 典型工作流
 
-**示例**：
-```
-@extract-concepts-from-note 从当前笔记中提取所有概念
-```
+1. **处理新资料**：Inbox 中的笔记 → `process-inbox-notes` →（若需沉淀概念）`extract-and-create-concepts` → `organize-note` 移动到对应 PARA 目录。
+2. **检索与关联**：直接在 Cursor Chat 中提问（如「知识库中与并发相关的笔记有哪些？」），或使用 Obsidian 内 Smart Connections 做语义关联。
+3. **笔记质量**：编辑后 AI 会按 `note-quality.mdc` 自动考虑原子性、链接与标签；无需单独命令。
 
-### 4. `find-related-notes`
-**用途**：查找相关笔记并建议链接关系
+## 提示
 
-**使用场景**：
-- 想要发现知识库中的关联
-- 建立笔记之间的连接
-
-**示例**：
-```
-@find-related-notes 查找与"并发"相关的所有笔记
-```
-
-### 5. `organize-note`
-**用途**：整理笔记到正确位置并添加标签
-
-**使用场景**：
-- 清理 Inbox
-- 整理未分类的笔记
-
-**示例**：
-```
-@organize-note 整理当前笔记到正确的目录
-```
-
-### 6. `search-knowledge-base`
-**用途**：在知识库中搜索并回答问题
-
-**使用场景**：
-- 查找特定主题的信息
-- 理解概念之间的关系
-
-**示例**：
-```
-@search-knowledge-base 什么是 Raft 算法？知识库中有哪些相关内容？
-```
-
-### 7. `suggest-note-improvements`
-**用途**：分析笔记并提出改进建议
-
-**使用场景**：
-- 优化现有笔记
-- 提高笔记质量
-
-**示例**：
-```
-@suggest-note-improvements 分析当前笔记并提出改进建议
-```
-
-## 🚀 典型工作流
-
-### 场景 1：处理新学习的视频
-1. 在 `Inbox` 快速记录
-2. 使用 `process-inbox-notes` 生成分析
-3. 使用 `extract-concepts-from-note` 提取概念
-4. 使用 `organize-note` 移动到 `Resources/Sources/Videos/`
-
-### 场景 2：创建新概念笔记
-1. 使用 `create-concept-note` 创建笔记
-2. 使用 `find-related-notes` 查找相关笔记
-3. 建立双向链接
-4. 使用 `suggest-note-improvements` 优化笔记
-
-### 场景 3：检索知识
-1. 使用 `search-knowledge-base` 提问
-2. Cursor 会在整个知识库中搜索
-3. 返回相关笔记和链接建议
-
-## 💡 提示
-
-- 规则文件会自动应用，无需手动调用
-- 命令可以通过 `@命令名` 的方式在 Cursor 中使用
-- 所有命令都理解 PARA 和 Zettelkasten 的结构
-- 优先在 `Resources/Topics/` 中查找概念笔记
+- 规则会自动应用；命令可通过 `@命令名` 或自然语言触发。
+- 概念笔记优先放在 `Resources/Topics/` 下对应领域目录。
+- 建议在仓库根目录创建 `.cursorignore`，排除 `.obsidian/`、`.trash/`、`assets/` 等，减少 AI 索引无关内容。若未创建，可手动添加上述路径。

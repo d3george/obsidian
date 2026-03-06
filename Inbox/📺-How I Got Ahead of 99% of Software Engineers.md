@@ -2,8 +2,8 @@
 title: "How I Got Ahead of 99% of Software Engineers"
 source: "https://www.youtube.com/watch?v=pksTiyUjwsU"
 tags:
-  - "source/video"
-  - "status/todo"
+  - source/video
+  - status/todo
 cover: "https://i.ytimg.com/vi/pksTiyUjwsU/maxresdefault.jpg"
 author:
   - "Hayk Simonyan"

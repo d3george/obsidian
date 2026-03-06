@@ -2,10 +2,10 @@
 title: "The Hidden Languages Powering Your Favorite Apps | Top API Protocols"
 source: "https://www.youtube.com/watch?v=oyYnRVQvxv4"
 tags:
-  - "source/video"
-  - "status/done"
-  - "topic/api"
-  - "topic/system-design"
+  - source/video
+  - status/done
+  - topic/api
+  - topic/system-design
 cover: "https://www.youtube.com/img/desktop/yt_1200.png"
 author:
   - "ByteMonk"

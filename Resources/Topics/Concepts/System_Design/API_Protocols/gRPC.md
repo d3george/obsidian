@@ -4,10 +4,10 @@ aliases:
   - "gRPC Remote Procedure Call"
   - "Google RPC"
 tags:
-  - "type/concept"
-  - "topic/api"
-  - "topic/system-design"
-  - "topic/microservices"
+  - type/concept
+  - topic/api
+  - topic/system-design
+  - topic/microservices
 created: 2024-12-07
 ---
 

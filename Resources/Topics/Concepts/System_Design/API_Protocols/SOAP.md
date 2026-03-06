@@ -3,10 +3,10 @@ title: "SOAP"
 aliases:
   - "Simple Object Access Protocol"
 tags:
-  - "type/concept"
-  - "topic/api"
-  - "topic/system-design"
-  - "topic/enterprise"
+  - type/concept
+  - topic/api
+  - topic/system-design
+  - topic/enterprise
 created: 2024-12-07
 ---
 

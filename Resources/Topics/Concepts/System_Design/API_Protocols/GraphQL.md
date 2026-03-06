@@ -3,10 +3,10 @@ title: "GraphQL"
 aliases:
   - "Graph Query Language"
 tags:
-  - "type/concept"
-  - "topic/api"
-  - "topic/system-design"
-  - "topic/web-development"
+  - type/concept
+  - topic/api
+  - topic/system-design
+  - topic/web-development
 created: 2024-12-07
 ---
 

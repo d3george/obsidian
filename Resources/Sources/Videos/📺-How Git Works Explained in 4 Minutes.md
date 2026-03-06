@@ -3,7 +3,7 @@ title: "How Git Works: Explained in 4 Minutes"
 source: https://www.youtube.com/watch?v=e9lnsKot_SQ
 tags:
   - source/video
-  - topic/
+  - topic/git
 cover: https://www.youtube.com/img/desktop/yt_1200.png
 author:
   - ByteByteGo
