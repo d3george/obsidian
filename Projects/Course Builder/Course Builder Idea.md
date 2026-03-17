@@ -12,8 +12,9 @@
 	- [x] Image
 	- [x] Mathematics
 	- [x] List Kit
-	- [ ] File handler
-	- [ ] Table
+	- [x] File handler
+	- [x] Table
 - [ ] Storage 文件上传/图片上传  路径整理
 - [ ] Admin 中添加 File 页面，用于管理 CF R2 中的文件
+- [ ] Better Auth 社交登录支持后台配置
 

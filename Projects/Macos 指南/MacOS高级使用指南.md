@@ -7,13 +7,13 @@ tags:
 了解如何将macOS转换为高度定制和高效的环境，最重要的是，让它看起来像Linux一样酷
 
 - [ ] Aerospace (窗口管理)
-- [ ] SketchyBa (自定义 menubar)
+- [ ] SketchyBar (自定义 menubar)
 - [ ] Ghostty
 	- [ ] oh-my-zsh
 	- [ ] Tmux
 	- [ ] Starship
 	- [ ] Btop
-- [ ] vim
+- [ ] ~~vim~~ -> Neovim
 - [ ] brew
 - [ ] dotfiles
 	- [ ] GNU Stow(符号链接管理器)
@@ -33,7 +33,7 @@ tags:
 - [ ] Cursor
 - [ ] Vivaldi
 	- [ ] Trancy （翻译）
-- [ ] ClashX Pro j(科学上网)
+- [ ] ClashX Pro(科学上网)
 	- [ ] Flower Cloud(Vps)
 - [ ] Shottr(截图)
 - [ ] AltTab（软件切换）
