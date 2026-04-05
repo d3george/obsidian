@@ -6,36 +6,36 @@ tags:
 
 了解如何将macOS转换为高度定制和高效的环境，最重要的是，让它看起来像Linux一样酷
 
-- [ ] Aerospace (窗口管理)
-- [ ] SketchyBar (自定义 menubar)
+- [x] Aerospace (窗口管理)
+- [x] SketchyBar (自定义 menubar)
 - [ ] Ghostty
-	- [ ] oh-my-zsh
+	- [x] oh-my-zsh
 	- [ ] Tmux
-	- [ ] Starship
+	- [x] Starship
 	- [ ] Btop
-- [ ] ~~vim~~ -> Neovim
-- [ ] brew
-- [ ] dotfiles
-	- [ ] GNU Stow(符号链接管理器)
+- [x] ~~vim~~ -> Neovim
+- [x] brew
+- [x] dotfiles
+	- [x] GNU Stow(符号链接管理器)
 
 命令行工具：
-- [ ] fzf(替代 find 命令)
-- [ ] eza(替代 ls 命令)
-- [ ] bat(替代 cat 命令)
-- [ ] zoxide(替代 cd 命令)
-- [ ] mole(命令行深度清理工具)
+- [x] fzf(替代 find 命令)
+- [x] eza(替代 ls 命令)
+- [x] bat(替代 cat 命令)
+- [x] zoxide(替代 cd 命令)
+- [x] mole(命令行深度清理工具)
 
 
 软件
-- [ ] Raycast 
-- [ ] Obsidian
-	- [ ] Obsidian Web Clipper (浏览器插件)
-- [ ] Cursor
-- [ ] Vivaldi
-	- [ ] Trancy （翻译）
-- [ ] ClashX Pro(科学上网)
-	- [ ] Flower Cloud(Vps)
-- [ ] Shottr(截图)
-- [ ] AltTab（软件切换）
-- [ ] Karabiner(改键）
-- [ ] Bob (Ocr 翻译)
+- [x] Raycast 
+- [x] Obsidian
+	- [x] Obsidian Web Clipper (浏览器插件)
+- [x] Cursor
+- [x] Vivaldi
+	- [x] Trancy （翻译）
+- [x] ClashX Pro(科学上网)
+	- [x] Flower Cloud(Vps)
+- [x] Shottr(截图)
+- [x] AltTab（软件切换）
+- [x] Karabiner(改键）
+- [x] Bob (Ocr 翻译)

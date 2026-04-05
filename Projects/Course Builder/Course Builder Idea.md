@@ -17,4 +17,12 @@
 - [ ] Storage 文件上传/图片上传  路径整理
 - [ ] Admin 中添加 File 页面，用于管理 CF R2 中的文件
 - [ ] Better Auth 社交登录支持后台配置
+- [ ] TipTap 换成 https://www.blocknotejs.org
+
+
+
+
+### 参考
+1. https://blog.algomaster.io/p/algomaster-tech-stack
+2. https://www.joshwcomeau.com/blog/how-i-built-my-blog-v2/
 
