@@ -3,9 +3,11 @@ tags:
   - type/summary
   - source/video
   - topic/devops
-source: https://www.youtube.com/watch?v=ObhdD49AEYw
+source: https://www.youtube.com/watch?v=ObhdD49AEYw https://www.youtube.com/watch?v=T1nFYnonON8
 ---
+![](https://www.youtube.com/watch?v=ObhdD49AEYw)
 
+![](https://www.youtube.com/watch?v=T1nFYnonON8)
 ## **Docker vs 虚拟机**
 
 Docker 并不是虚拟机 (VM)。虚拟机是在物理机上运行一个完整的辅助操作系统，这非常笨重。Docker 的本质是在你的宿主机上运行一个**被隔离的进程**。
@@ -168,7 +170,7 @@ Docker 的层级缓存（Layer Caching）是提升构建效率的核武器。
 Docker安装后，它会出创建一个名为 `bridge`的默认网络。你运行的任何容器都会连接到这个网络上。
 ![](./assets/掌握Docker的核心概念而非死记命令/image-2026-03-19-10-54-38.png)
 
-在默认的 `bridge` 网络上的容器只可以通过 `IP` 相互通信。这种j在多容器应用中，硬编码 IP 地址是极其危险的。因为每次重启容器，容器的 IP 可能会发生变化。
+在默认的 `bridge` 网络上的容器只可以通过 `IP` 相互通信。在多容器应用中，硬编码 IP 地址是极其危险的。因为每次重启容器，容器的 IP 可能会发生变化。
 
 ![](./assets/掌握Docker的核心概念而非死记命令/image-2026-03-19-10-56-49.png)
 
