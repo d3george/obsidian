@@ -1,6 +1,19 @@
 .obsidian
 
-
-
 # Ignore Smart Environment folder
 .smart-env
+
+# 媒体与附件
+assets/
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.webp
+*.pdf
+*.mp4
+*.webm
+
+# 旧的 Cursor 配置（已迁移到 .claude/）
+.cursor/
+.cursorignore
