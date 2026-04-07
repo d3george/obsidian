@@ -1,1 +1,14 @@
 
+- [ ] Ghostty
+- [ ] neovim
+- [ ] Tmux (命令行会话管理)
+- [ ] Starship（美化工具)
+- [ ] fzf(替代 find)
+- [ ] eza(替代 ls)
+- [ ] bat(替代 cat)
+- [ ] zoxide(替代 cd)
+- [ ] mole（深度清理)
+- [ ] yazi （文件管理）
+- [ ] tldr(替代 man, 搜索执行命令行的工具命令)
+- [ ] taproom （搜索和管理 homebrew 安装包 ）
+- [ ] 
