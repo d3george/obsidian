@@ -21,7 +21,7 @@
 ```
 slash-space/
 ├── raw/                      # 层 1：原始来源（不可变，LLM 只读）
-│   ├── Articles/
+│   ├── articles/
 │   └── assets/               # 所有附件
 ├── wiki/                     # 层 2：LLM 维护的知识库
 │   ├── index.md              # 内容目录
@@ -33,7 +33,7 @@ slash-space/
 └── CLAUDE.md                 # 层 3：Schema
 ```
 
-> 需要时可在 `raw/` 下新建 `Books/`、`Videos/`、`Podcasts/` 等子目录。可在 `wiki/concepts/` 下新建主题子目录。
+> 需要时可在 `raw/` 下新建 `books/`、`videos/`、`podcasts/` 等子目录（小写命名）。可在 `wiki/concepts/` 下新建主题子目录。
 
 ## Wiki 页面格式
 
@@ -103,7 +103,7 @@ raw: "[[raw 中的文件名]]"
 触发：`/ingest [来源文件]`
 
 1. 读取 `raw/` 中的来源
-2. 与用户讨论关键要点（可选）
+2. 与用户讨论关键要点（展示核心要点和计划提取的概念，用户可跳过）
 3. 在 `wiki/sources/` 创建来源摘要页
 4. 识别概念 → 在 `wiki/concepts/` 创建或更新概念页
 5. 更新已有页面中的交叉引用和矛盾标记
@@ -125,7 +125,7 @@ raw: "[[raw 中的文件名]]"
 触发：`/lint`
 
 1. 扫描 `wiki/` 全部页面
-2. 检查：孤立页、死链接、缺失概念、矛盾、frontmatter 不完整
+2. 检查：孤立页、死链接、缺失概念、矛盾、frontmatter 不完整、知识缺口与新来源建议
 3. 生成报告和修复建议
 4. 追加条目到 `wiki/log.md`
 
