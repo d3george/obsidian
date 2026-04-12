@@ -1,8 +1,0 @@
-{
-  "mcpServers": {
-    "obsidian": {
-      "command": "npx",
-      "args": ["-y", "obsidian-mcp", "/Users/dingsheng/Develop/obsidian/slash-space"]
-    }
-  }
-}
