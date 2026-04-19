@@ -28,7 +28,7 @@ AuthorUrl: https://www.youtube.com/@ByteMonk
 
 ## 🤖 AI 分析 (Processed by Cursor)
 
-![](../../../raw/assets/image-2025-12-03-13-16-28.png)
+![](../../../raw/assets/wiki/concepts/system-design/SOLID/image-2025-12-03-13-16-28.png)
 
 ### 📋 Quick Reference
 

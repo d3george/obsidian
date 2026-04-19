@@ -20,7 +20,7 @@ sources: 0
 
 >这是你的私人工作台，你在这里进行所有的编辑和创造。
 
-![](../../../raw/assets/image-2025-11-23-20-38-32.png)
+![](../../../raw/assets/wiki/concepts/devops/How Git Works/image-2025-11-23-20-38-32.png)
 
 - **文件状态**：
     
@@ -33,7 +33,7 @@ sources: 0
 
 > 这是 Git 最独特的设计之一，一个提交前的“缓冲区”或“准备室”。
 
-![](../../../raw/assets/image-2025-11-23-20-39-57.png)
+![](../../../raw/assets/wiki/concepts/devops/How Git Works/image-2025-11-23-20-39-57.png)
 
 - **核心概念**：**快照 (Snapshot)**。暂存区里存放的，是你希望包含在下一次提交中的文件状态的快照。你可以把它想象成在拍照前摆好的姿势。
     
@@ -46,7 +46,7 @@ sources: 0
 
 > 这是你的私人档案馆，所有提交的历史记录都安全地保存在这里。
 
-![](../../../raw/assets/image-2025-11-23-20-41-04.png)
+![](../../../raw/assets/wiki/concepts/devops/How Git Works/image-2025-11-23-20-41-04.png)
 
 - **核心功能**：**版本控制**。这里存储着项目完整的提交历史（如图中的 `c1`, `c2`, `c3`）。每一个圆点都是一个永久的记录，你可以随时回溯到任何一个版本。
     
@@ -59,7 +59,7 @@ sources: 0
 
 > 这是团队协作和代码备份的云端中心，比如 GitHub。
 
-![](../../../raw/assets/image-2025-11-23-20-41-45.png)
+![](../../../raw/assets/wiki/concepts/devops/How Git Works/image-2025-11-23-20-41-45.png)
 
 - **核心功能**：**协作与共享**。图中的小人代表了你的团队成员，大家都在与这个中心仓库交互。
     
@@ -74,13 +74,13 @@ sources: 0
 
 我们模拟一次代码提交的过程，看看 `git add`、`commit` 和 `push` 是如何一步步驱动代码移动的。
 
-![](../../../raw/assets/image-2025-11-23-20-43-14.png)
+![](../../../raw/assets/wiki/concepts/devops/How Git Works/image-2025-11-23-20-43-14.png)
 
 
 ### 拉取代码
 这张图清晰地展示了 Git 中从远程仓库获取更新并同步到本地的两种主要方式：`git pull` 的直接同步，以及 `git fetch` 与 `git merge` 的分步操作。
 
-![](../../../raw/assets/image-2025-11-23-20-50-48.png)
+![](../../../raw/assets/wiki/concepts/devops/How Git Works/image-2025-11-23-20-50-48.png)
 
 让我们逐一解释图中箭头的含义：
 
@@ -120,7 +120,7 @@ sources: 0
 #### `git merge` (合并)
 
 **核心思想：** 保留所有分支的原始提交历史，并在集成时创建一个新的“合并提交”来连接两个分支的演变。
-![](../../../raw/assets/image-2025-11-23-21-07-29.png)
+![](../../../raw/assets/wiki/concepts/devops/How Git Works/image-2025-11-23-21-07-29.png)
 
 **工作原理：** 当你在 `main` 分支上执行 `git merge feature` 时：
 
@@ -163,7 +163,7 @@ git merge feature
 #### `git rebase` (变基)
 
 **核心思想：** 重写一个分支的提交历史，使其看起来像是在另一个分支的最新提交之后“重新播放”一遍，从而创建一条干净、线性的历史。
-![](../../../raw/assets/image-2025-11-23-21-10-38.png)
+![](../../../raw/assets/wiki/concepts/devops/How Git Works/image-2025-11-23-21-10-38.png)
 
 **工作原理：** 当你在 `feature` 分支上执行 `git rebase main` 时：
 
@@ -211,7 +211,7 @@ git merge feature # 这通常是一个快进合并 (Fast-Forward Merge)，因为
 #### `Squash Commit` (压缩提交)
 
 **核心思想：** 将一个分支上的多个提交压缩成一个单一的、有意义的提交。这通常与 `rebase` 或 `merge` 结合使用。
-![](../../../raw/assets/image-2025-11-23-21-16-15.png)
+![](../../../raw/assets/wiki/concepts/devops/How Git Works/image-2025-11-23-21-16-15.png)
 
 **工作原理：** `Squash Commit` 本身不是一个独立的 Git 命令，而是一种通过 `git rebase -i` (交互式变基) 或 `git merge --squash` 实现的策略。
 

@@ -31,6 +31,15 @@
 - [[tmux-cheatsheet]] — tmux 高频快捷键速查，覆盖窗口管理、面板分割、复制模式
 - [[掌握Docker的核心概念而非死记命令]] — Docker 核心概念：Image/Container、Dockerfile 缓存、数据持久化、Compose 编排
 
+### Networking
+
+- [[Clash Verge Rev]] — Clash 内核代理管理工具，TUN 模式 + Profile Enhancement 模板注入
+- [[Fake-IP DNS]] — Clash DNS 增强模式，返回假 IP 加速连接，特定场景需排除
+- [[FortiClient VPN]] — 企业级 VPN 客户端，可通过 VM 隔离避免全局流量监控
+- [[Parallels 端口转发]] — 共享网络模式下宿主机到虚拟机的端口映射
+- [[SOCKS5 代理]] — 传输层通用代理协议，支持 TCP/UDP，`socks5h` 代理端做 DNS 解析
+- [[SSH 隧道]] — SSH 动态端口转发创建加密通道，暴露 SOCKS5 代理到本地
+
 ### Product
 
 - [[MVP]] — 最小可行产品：解决用户核心痛点、形成价值闭环的最小产品形态
@@ -48,6 +57,7 @@
 - [[tmux 简明介绍]] — tmux 核心概念与常用命令
 - [[How to Build a Minimum Viable Product (MVP)]] — MVP 三态模型与发布策略
 - [[掌握Docker的核心概念]] — Docker 核心概念系统讲解
+- [[macOS VPN 隧道内网访问方案]] — VM + SSH 隧道 + Clash TUN 精准域名路由方案，附流量流转图
 
 ## 对比与综合
 
@@ -59,12 +69,12 @@
 
 | 类型 | 数量 |
 |------|------|
-| Articles | 10 |
-| **总计** | **10** |
+| Articles | 9 |
+| **总计** | **9** |
 
 ## 统计
 
-- 概念笔记：21
-- Raw 来源：10（3 已处理，7 待 ingest）
-- 来源摘要：3
+- 概念笔记：27
+- Raw 来源：9（4 已处理，5 待 ingest）
+- 来源摘要：4
 - 对比/综合：0

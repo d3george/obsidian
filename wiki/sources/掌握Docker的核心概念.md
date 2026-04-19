@@ -1,13 +1,13 @@
 ---
 created: 2026-04-12
-updated: 2026-04-12
+updated: 2026-04-19
 title: 掌握Docker的核心概念而非死记命令
 author:
   - ByteMonk
 url:
   - https://www.youtube.com/watch?v=ObhdD49AEYw
   - https://www.youtube.com/watch?v=T1nFYnonON8
-raw: "[[掌握Docker的核心概念而非死记命令]]"
+raw: "无（来源为 ByteMonk 视频，仓库内未落 raw 文稿；见 url）"
 ---
 
 # 掌握Docker的核心概念而非死记命令

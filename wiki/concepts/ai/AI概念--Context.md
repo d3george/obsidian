@@ -30,7 +30,7 @@ sources: 0
 - **窗口限制与策略**：模型有最大 token 上限；产品常采用**滑动窗口**（ oldest 丢弃）、**摘要压缩**、** relevance 排序**等策略，而非简单截断。
 - **成本与延迟**：上下文越长，推理耗时与计费通常越高；无关内容会**稀释注意力**，故需要筛选（如 Cursor 的代码索引、Claude 的 context7 优先级）。
 
-![](../../../raw/assets/image-2026-04-07-16-24-05.png)
+![](../../../raw/assets/wiki/concepts/ai/AI概念--Context/image-2026-04-07-16-24-05.png)
 ## 在 Cursor/Claude Code 中的体现
 
 | 产品 | 上下文管理方式 | 关键机制 |

@@ -19,7 +19,7 @@ sources: 0
 
 > **对应关系**：「手册」对应 **Skill 的 Markdown 文档**（SKILL.md）；「哪道菜」对应 **触发条件**（description 里的症状/场景）；「步骤与禁忌」对应 **Core Pattern、When NOT to use、Checklist**；「后厨自动按手册做」对应 **Agent 检测到场景匹配后加载 Skill 并遵循其约束**。
 
-![](../../../raw/assets/image-2026-04-07-17-08-24.png)
+![](../../../raw/assets/wiki/concepts/ai/AI概念--Skill/image-2026-04-07-17-08-24.png)
 ## 核心要点
 
 - **来源与定位**：Anthropic（Claude 的母公司）在 2025 年 10 月推出，作为 **Claude Code 的能力扩展机制**；与 Cursor 的 Custom Commands 类似，但更强调「条件触发 + 完整工作流」而非单一提示词。

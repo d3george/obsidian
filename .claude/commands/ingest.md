@@ -41,7 +41,11 @@
 
 ## 注意事项
 
-- `raw/` 文件永不修改
+- `raw/` 来源正文在摄入时不改写；如做附件路径治理，可更新其中的附件引用路径
 - 一个来源可能涉及 10-15 个 wiki 页面的更新，不要偷懒只改一两个
 - 所有输出使用简体中文
 - 图片引用使用标准 markdown `![](path)` 格式
+- `raw/articles/foo.md` 的附件路径规范为 `raw/assets/articles/foo/`
+- 仅出现在 `wiki/concepts/...` 的图片路径规范为 `raw/assets/wiki/concepts/<topic>/<页面名>/`
+- 流程图文件（`.canvas`、`.excalidraw`、`.excalidraw.md`）统一放在 `x/`
+- `wiki/` 不单独存附件目录，继续引用 `raw/assets/` 与 `x/` 中的资源

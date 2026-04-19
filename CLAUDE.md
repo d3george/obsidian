@@ -22,7 +22,7 @@
 slash-space/
 ├── raw/                      # 层 1：原始来源（不可变，LLM 只读）
 │   ├── articles/
-│   └── assets/               # 所有附件
+│   └── assets/               # 附件：articles 按来源分桶；wiki 概念图按 wiki 路径分桶
 ├── wiki/                     # 层 2：LLM 维护的知识库
 │   ├── index.md              # 内容目录
 │   ├── log.md                # 操作日志（append-only）
@@ -30,6 +30,7 @@ slash-space/
 │   ├── sources/              # 来源摘要页
 │   ├── comparisons/          # 对比页
 │   └── synthesis/            # 综合页
+├── x/                        # 流程图与画布文件（.canvas / .excalidraw / .excalidraw.md）
 └── CLAUDE.md                 # 层 3：Schema
 ```
 
@@ -145,7 +146,11 @@ raw: "[[raw 中的文件名]]"
 1. **交叉引用**：概念页链接到相关概念和来源；来源页链接到提取的概念
 2. **矛盾标记**：新来源与旧内容矛盾时，不静默覆盖，用 `[!contradiction]` 标注
 3. **frontmatter**：包含 `created`、`updated`；概念页含 `sources` 计数
-4. **图片**：统一存放在 `raw/assets/`，用标准 markdown `![](path)` 引用
+4. **附件**：
+   - `raw/articles/foo.md` 的附件放在 `raw/assets/articles/foo/`
+   - 仅出现在 `wiki/concepts/...` 的图片，放在 `raw/assets/wiki/concepts/<topic>/<页面名>/`
+5. **流程图**：`.canvas`、`.excalidraw`、`.excalidraw.md` 统一放在 `x/`
+6. **图片引用**：使用标准 markdown `![](path)` 格式；`wiki/` 继续引用 `raw/assets/` 与 `x/` 中的资源
 
 ## 文风约定
 

@@ -17,24 +17,24 @@ url: https://xtoolism.github.io/xtool/Obsidian/obsidian-%E9%99%84%E4%BB%B6%E7%AE
 - **自动处理更新**: 笔记重命名，笔记移动，文件重命名会自动更新关联， 这个自动更新功能太强了，其他插件会存在引用失效问题 
 
 配置见截图：
-![](../assets/image.png)
+![](../assets/articles/obsidian 附件管理最佳实践/image.png)
 
 ### [image-converter](obsidian://show-plugin?id=image-converter)
 我们使用该插件来控制粘贴图片时的一些行为
 -  **Folder** 控制粘贴的图片保存到哪个文件夹下
-	![](../assets/image-1.png)
+	![](../assets/articles/obsidian 附件管理最佳实践/image-1.png)
 - **FileName** 控制粘贴的图片的文件名
-	![](../assets/image-2025-11-11-20-19-56.png)
+	![](../assets/articles/obsidian 附件管理最佳实践/image-2025-11-11-20-19-56.png)
 - **Link format** 控制粘贴图片在文章类的显示形式
 	- **Link format**: 选项要设置为 Markdown
 	- **Path format** 选项要设置为 Relative
 	
 	 这样粘贴后自动生成 `![](./assets/文件名/image-时间戳.png)`这种格式的 link, 方便在任何支持 Markdown 的编辑器中显示
-	![](../assets/image-2025-11-11-20-22-03.png)
+	![](../assets/articles/obsidian 附件管理最佳实践/image-2025-11-11-20-22-03.png)
 
 
 
 按照上面配置好之后，此时在 `B/demo.md`笔记中复制图片，图片会自动保存为 `B/assets/demo/image-n.png`
 
-![](../assets/image-2.png)
+![](../assets/articles/obsidian 附件管理最佳实践/image-2.png)
 
