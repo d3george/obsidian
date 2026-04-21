@@ -1,3 +1,7 @@
+---
+description: 摄入来源并更新 wiki
+---
+
 摄入一个来源文件，生成来源摘要、提取概念、更新 index 和 log。
 
 ## 用法
@@ -17,7 +21,7 @@
 3. 根据用户反馈调整提取策略（用户可跳过此步直接进入第三步）
 
 ### 第三步：创建来源摘要
-在 `wiki/sources/` 下创建摘要页，遵循 CLAUDE.md 中的「来源摘要页」格式：
+在 `wiki/sources/` 下创建摘要页，遵循 `AGENTS.md` 中的「来源摘要页」格式：
 - frontmatter：created、updated、title、author、url、raw（链接到 raw 文件）
 - 正文：摘要（2-4句）、核心要点（3-5条）、值得关注、提取的概念
 

@@ -18,7 +18,7 @@
 
 ## 目录结构
 
-```
+```text
 slash-space/
 ├── raw/                      # 层 1：原始来源（不可变，LLM 只读）
 │   ├── articles/
@@ -31,7 +31,9 @@ slash-space/
 │   ├── comparisons/          # 对比页
 │   └── synthesis/            # 综合页
 ├── x/                        # 流程图与画布文件（.canvas / .excalidraw / .excalidraw.md）
-└── CLAUDE.md                 # 层 3：Schema
+├── .opencode/                # OpenCode 项目配置
+│   └── commands/             # 自定义命令
+└── AGENTS.md                 # 项目规则
 ```
 
 > 需要时可在 `raw/` 下新建 `books/`、`videos/`、`podcasts/` 等子目录（小写命名）。可在 `wiki/concepts/` 下新建主题子目录。
@@ -101,7 +103,8 @@ raw: "[[raw 中的文件名]]"
 ## 操作流程
 
 ### Ingest（摄入）
-触发：`/ingest [来源文件]`
+
+OpenCode 自定义命令：`/ingest [来源文件]`
 
 1. 读取 `raw/` 中的来源
 2. 与用户讨论关键要点（展示核心要点和计划提取的概念，用户可跳过）
@@ -114,7 +117,8 @@ raw: "[[raw 中的文件名]]"
 一个来源可能涉及 10-15 个 wiki 页面的更新。
 
 ### Query（查询）
-触发：`/query [问题]`
+
+OpenCode 自定义命令：`/query [问题]`
 
 1. 读取 `wiki/index.md` 定位相关页面
 2. 钻入具体页面读取详情
@@ -123,7 +127,8 @@ raw: "[[raw 中的文件名]]"
 5. 追加条目到 `wiki/log.md`
 
 ### Lint（检查）
-触发：`/lint`
+
+OpenCode 自定义命令：`/lint`
 
 1. 扫描 `wiki/` 全部页面
 2. 检查：孤立页、死链接、缺失概念、矛盾、frontmatter 不完整、知识缺口与新来源建议
@@ -133,11 +138,13 @@ raw: "[[raw 中的文件名]]"
 ## 导航文件
 
 ### wiki/index.md
+
 - 每次 ingest / query / lint 后更新
 - 分类列出所有页面，每个页面附一行摘要
 - 底部统计数据
 
 ### wiki/log.md
+
 - Append-only，永不删除或修改已有条目
 - 格式：`## [YYYY-MM-DD] 操作类型 | 描述`
 
@@ -146,11 +153,19 @@ raw: "[[raw 中的文件名]]"
 1. **交叉引用**：概念页链接到相关概念和来源；来源页链接到提取的概念
 2. **矛盾标记**：新来源与旧内容矛盾时，不静默覆盖，用 `[!contradiction]` 标注
 3. **frontmatter**：包含 `created`、`updated`；概念页含 `sources` 计数
-4. **附件**：
+4. **附件布局**：
    - `raw/articles/foo.md` 的附件放在 `raw/assets/articles/foo/`
    - 仅出现在 `wiki/concepts/...` 的图片，放在 `raw/assets/wiki/concepts/<topic>/<页面名>/`
 5. **流程图**：`.canvas`、`.excalidraw`、`.excalidraw.md` 统一放在 `x/`
 6. **图片引用**：使用标准 markdown `![](path)` 格式；`wiki/` 继续引用 `raw/assets/` 与 `x/` 中的资源
+7. **路径修正**：修改历史引用时，只改目标文件真实存在且归属明确的路径；不要猜测性重写坏链
+
+## 工作约束
+
+- `raw/` 来源正文在摄入时不改写；如做附件路径治理，可更新其中的附件引用路径
+- 一个来源可能涉及 10-15 个 wiki 页面的更新，不要偷懒只改一两个
+- 所有输出使用简体中文
+- 术语一致，首次出现可简短解释
 
 ## 文风约定
 
