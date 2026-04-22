@@ -1,0 +1,725 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OpenCode 核心概念速查表</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #020617;
+        --panel: #0f172a;
+        --panel-soft: #111827;
+        --line: #1e293b;
+        --text: #e2e8f0;
+        --muted: #94a3b8;
+        --cyan: #22d3ee;
+        --emerald: #34d399;
+        --violet: #a78bfa;
+        --amber: #fbbf24;
+        --rose: #fb7185;
+        --orange: #fb923c;
+        --slate: #94a3b8;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: #020617;
+        color: var(--text);
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .page {
+        min-height: 100vh;
+        padding: 14px;
+        background-image:
+          linear-gradient(rgba(30, 41, 59, 0.22) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(30, 41, 59, 0.22) 1px, transparent 1px);
+        background-size: 40px 40px;
+      }
+
+      .board {
+        max-width: 1500px;
+        margin: 0 auto;
+      }
+
+      .topbar {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 12px;
+        align-items: start;
+        margin-bottom: 10px;
+      }
+
+      .title h1 {
+        margin: 0;
+        font-size: 34px;
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+      }
+
+      .title p {
+        margin: 6px 0 0;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .meta {
+        text-align: right;
+        font-size: 11px;
+        color: var(--muted);
+      }
+
+      .meta .pill {
+        display: inline-block;
+        margin-left: 6px;
+        padding: 4px 8px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: rgba(15, 23, 42, 0.85);
+      }
+
+      .summary {
+        display: flex;
+        gap: 14px;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-bottom: 14px;
+        padding: 10px 14px;
+        border: 1px solid #fbbf24;
+        border-radius: 10px;
+        background: rgba(120, 53, 15, 0.16);
+        box-shadow: inset 0 0 0 1px rgba(251, 191, 36, 0.15);
+      }
+
+      .summary strong {
+        color: #fde68a;
+        font-size: 12px;
+      }
+
+      .summary span {
+        color: #cbd5e1;
+        font-size: 11px;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+        align-items: start;
+      }
+
+      .column {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .panel {
+        border-radius: 10px;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        background: rgba(15, 23, 42, 0.94);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+      }
+
+      .panel-header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 10px;
+        font-size: 13px;
+        font-weight: 700;
+        color: white;
+      }
+
+      .panel-header .icon {
+        font-size: 12px;
+      }
+
+      .cyan {
+        background: linear-gradient(90deg, #1d4ed8, #2563eb);
+      }
+      .violet {
+        background: linear-gradient(90deg, #6d28d9, #7c3aed);
+      }
+      .red {
+        background: linear-gradient(90deg, #dc2626, #ef4444);
+      }
+      .green {
+        background: linear-gradient(90deg, #059669, #10b981);
+      }
+      .teal {
+        background: linear-gradient(90deg, #0891b2, #06b6d4);
+      }
+      .orange {
+        background: linear-gradient(90deg, #d97706, #f59e0b);
+      }
+      .amber {
+        background: linear-gradient(90deg, #b45309, #fbbf24);
+        color: #111827;
+      }
+      .slate {
+        background: linear-gradient(90deg, #334155, #475569);
+      }
+
+      .panel-body {
+        padding: 10px 12px 12px;
+      }
+
+      .section + .section {
+        margin-top: 10px;
+        padding-top: 10px;
+        border-top: 1px dashed rgba(148, 163, 184, 0.22);
+      }
+
+      .section-title {
+        margin: 0 0 6px;
+        color: #f8fafc;
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .item {
+        display: grid;
+        grid-template-columns: 108px 1fr;
+        gap: 8px;
+        padding: 4px 0;
+        font-size: 11px;
+        line-height: 1.45;
+      }
+
+      .key {
+        color: #e2e8f0;
+        font-weight: 600;
+        white-space: nowrap;
+      }
+
+      .desc {
+        color: var(--muted);
+      }
+
+      .code {
+        color: #f8fafc;
+        background: rgba(2, 6, 23, 0.9);
+        border: 1px solid rgba(148, 163, 184, 0.18);
+        border-radius: 4px;
+        padding: 1px 5px;
+      }
+
+      .note {
+        margin-top: 8px;
+        font-size: 10px;
+        color: #cbd5e1;
+      }
+
+      .footerbar {
+        margin-top: 12px;
+        padding: 10px 12px;
+        border-radius: 10px;
+        border: 1px solid var(--line);
+        background: rgba(15, 23, 42, 0.96);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        font-size: 11px;
+        color: var(--muted);
+      }
+
+      .footerbar .tag {
+        padding: 4px 8px;
+        border-radius: 999px;
+        border: 1px solid rgba(148, 163, 184, 0.2);
+        background: rgba(2, 6, 23, 0.85);
+      }
+
+      @media (max-width: 1280px) {
+        .grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 760px) {
+        .topbar {
+          grid-template-columns: 1fr;
+        }
+
+        .meta {
+          text-align: left;
+        }
+
+        .grid {
+          grid-template-columns: 1fr;
+        }
+
+        .item {
+          grid-template-columns: 1fr;
+          gap: 2px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="board">
+        <div class="topbar">
+          <div class="title">
+            <h1>OpenCode 核心概念速查表</h1>
+            <p>
+              参考 Claude Code 速查表的编排方式，改为 OpenCode
+              概念分组速查。只借布局，不借视觉风格。
+            </p>
+          </div>
+          <div class="meta">
+            <div>
+              <span class="pill">OpenCode</span
+              ><span class="pill">AGENTS.md</span
+              ><span class="pill">.opencode</span>
+            </div>
+            <div style="margin-top: 8px">最后更新：2026-04-22</div>
+          </div>
+        </div>
+
+        <div class="summary">
+          <strong>速查范围</strong>
+          <span>输入与上下文</span>
+          <span>规则与命令</span>
+          <span>主代理与子代理</span>
+          <span>Skills / MCP / Plugins / Tools</span>
+          <span>配置、权限、分享、回滚</span>
+        </div>
+
+        <div class="grid">
+          <div class="column">
+            <section class="panel">
+              <div class="panel-header cyan">
+                <span class="icon">⌘</span><span>输入与上下文</span>
+              </div>
+              <div class="panel-body">
+                <div class="section">
+                  <h3 class="section-title">会话入口</h3>
+                  <div class="item">
+                    <div class="key">Prompt</div>
+                    <div class="desc">
+                      你发给 OpenCode
+                      的直接任务描述，可包含文件、图片、约束和目标。
+                    </div>
+                  </div>
+                  <div class="item">
+                    <div class="key">@ 文件</div>
+                    <div class="desc">
+                      用
+                      <span class="code">@path/to/file</span>
+                      明确拉入特定文件内容，降低误解成本。
+                    </div>
+                  </div>
+                  <div class="item">
+                    <div class="key">图片输入</div>
+                    <div class="desc">
+                      可拖入终端，为设计、界面或参考图提供额外上下文。
+                    </div>
+                  </div>
+                </div>
+                <div class="section">
+                  <h3 class="section-title">上下文</h3>
+                  <div class="item">
+                    <div class="key">Context</div>
+                    <div class="desc">
+                      当前会话可见的全部信息：对话历史、文件、规则、工具输出。
+                    </div>
+                  </div>
+                  <div class="item">
+                    <div class="key">Compaction</div>
+                    <div class="desc">
+                      上下文过长时自动压缩历史，保留关键摘要。
+                    </div>
+                  </div>
+                  <div class="item">
+                    <div class="key">Summary</div>
+                    <div class="desc">
+                      系统隐藏代理生成会话摘要，帮助长会话续航。
+                    </div>
+                  </div>
+                </div>
+                <div class="note">
+                  心法：Prompt 决定目标，Context 决定代理“看得到什么”。
+                </div>
+              </div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-header teal">
+                <span class="icon">↺</span><span>会话与结果</span>
+              </div>
+              <div class="panel-body">
+                <div class="section">
+                  <h3 class="section-title">常用能力</h3>
+                  <div class="item">
+                    <div class="key">/undo</div>
+                    <div class="desc">撤销代理在当前会话中的最近改动。</div>
+                  </div>
+                  <div class="item">
+                    <div class="key">/redo</div>
+                    <div class="desc">恢复刚撤销的改动。</div>
+                  </div>
+                  <div class="item">
+                    <div class="key">/share</div>
+                    <div class="desc">
+                      把当前会话生成可分享链接，默认不是自动公开。
+                    </div>
+                  </div>
+                </div>
+                <div class="section">
+                  <h3 class="section-title">补充概念</h3>
+                  <div class="item">
+                    <div class="key">Snapshot</div>
+                    <div class="desc">
+                      用于跟踪文件改动，支持回滚；可在配置中关闭。
+                    </div>
+                  </div>
+                  <div class="item">
+                    <div class="key">Share</div>
+                    <div class="desc">
+                      可配置为 <span class="code">manual</span> /
+                      <span class="code">auto</span> /
+                      <span class="code">disabled</span>。
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <div class="column">
+            <section class="panel">
+              <div class="panel-header violet">
+                <span class="icon">⚡</span><span>规则与命令</span>
+              </div>
+              <div class="panel-body">
+                <div class="section">
+                  <h3 class="section-title">规则文件</h3>
+                  <div class="item">
+                    <div class="key">AGENTS.md</div>
+                    <div class="desc">
+                      项目级规则中心。定义结构、验证顺序、惯例和注意事项。
+                    </div>
+                  </div>
+                  <div class="item">
+                    <div class="key">全局 AGENTS</div>
+                    <div class="desc">
+                      <span class="code">~/.config/opencode/AGENTS.md</span
+                      >，用于个人全局偏好。
+                    </div>
+                  </div>
+                  <div class="item">
+                    <div class="key">兼容 CLAUDE.md</div>
+                    <div class="desc">
+                      若没有 AGENTS.md，OpenCode 可回退读取 Claude Code 规则。
+                    </div>
+                  </div>
+                </div>
+                <div class="section">
+                  <h3 class="section-title">自定义命令</h3>
+                  <div class="item">
+                    <div class="key">目录</div>
+                    <div class="desc">
+                      <span class="code">.opencode/commands/*.md</span
+                      >，文件名即命令名。
+                    </div>
+                  </div>
+                  <div class="item">
+                    <div class="key">用途</div>
+                    <div class="desc">
+                      把重复工作流固化成
+                      <span class="code">/ingest</span>、<span class="code"
+                        >/lint</span
+                      >
+                      等命令。
+                    </div>
+                  </div>
+                  <div class="item">
+                    <div class="key">能力</div>
+                    <div class="desc">
+                      支持参数占位、文件引用、shell 输出注入、指定 agent /
+                      model。
+                    </div>
+                  </div>
+                </div>
+                <div class="note">规则是长期约束，命令是可复用工作流。</div>
+              </div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-header amber">
+                <span class="icon">⚙</span><span>配置与目录</span>
+              </div>
+              <div class="panel-body">
+                <div class="section">
+                  <h3 class="section-title">配置入口</h3>
+                  <div class="item">
+                    <div class="key">opencode.json</div>
+                    <div class="desc">
+                      项目级 JSON/JSONC 配置，可定义
+                      model、agent、command、permission、mcp、plugin。
+                    </div>
+                  </div>
+                  <div class="item">
+                    <div class="key">全局配置</div>
+                    <div class="desc">
+                      <span class="code">~/.config/opencode/opencode.json</span
+                      >。
+                    </div>
+                  </div>
+                  <div class="item">
+                    <div class="key">TUI 配置</div>
+                    <div class="desc">
+                      <span class="code">tui.json</span>
+                      管主题、键位、界面行为。
+                    </div>
+                  </div>
+                </div>
+                <div class="section">
+                  <h3 class="section-title">目录约定</h3>
+                  <div class="item">
+                    <div class="key">.opencode</div>
+                    <div class="desc">
+                      项目级目录，可放
+                      <span class="code">commands/</span>、<span class="code"
+                        >agents/</span
+                      >、<span class="code">plugins/</span>、<span class="code"
+                        >skills/</span
+                      >。
+                    </div>
+                  </div>
+                  <div class="item">
+                    <div class="key">instructions</div>
+                    <div class="desc">
+                      在
+                      <span class="code">opencode.json</span>
+                      里额外加载规则文件或远程规则。
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <div class="column">
+            <section class="panel">
+              <div class="panel-header red">
+                <span class="icon">🧠</span><span>代理模式与协作</span>
+              </div>
+              <div class="panel-body">
+                <div class="section">
+                  <h3 class="section-title">主代理</h3>
+                  <div class="item">
+                    <div class="key">Build</div>
+                    <div class="desc">
+                      默认主代理，适合真实实现与改动，通常有完整工具权限。
+                    </div>
+                  </div>
+                  <div class="item">
+                    <div class="key">Plan</div>
+                    <div class="desc">
+                      受限主代理，偏分析、方案、评审，默认对 edit/bash 更保守。
+                    </div>
+                  </div>
+                  <div class="item">
+                    <div class="key">切换方式</div>
+                    <div class="desc">
+                      在 TUI 中用
+                      <span class="code">Tab</span> 在主代理之间切换。
+                    </div>
+                  </div>
+                </div>
+                <div class="section">
+                  <h3 class="section-title">子代理</h3>
+                  <div class="item">
+                    <div class="key">General</div>
+                    <div class="desc">
+                      通用子代理，适合复杂研究、多步骤任务与并行工作。
+                    </div>
+                  </div>
+                  <div class="item">
+                    <div class="key">Explore</div>
+                    <div class="desc">
+                      只读子代理，适合找文件、搜索代码、解释结构。
+                    </div>
+                  </div>
+                  <div class="item">
+                    <div class="key">@ 调用</div>
+                    <div class="desc">
+                      可手动写 <span class="code">@general</span> 或
+                      <span class="code">@explore</span> 调用。
+                    </div>
+                  </div>
+                </div>
+                <div class="section">
+                  <h3 class="section-title">自定义代理</h3>
+                  <div class="item">
+                    <div class="key">目录</div>
+                    <div class="desc">
+                      <span class="code">.opencode/agents/*.md</span>。
+                    </div>
+                  </div>
+                  <div class="item">
+                    <div class="key">可配置项</div>
+                    <div class="desc">
+                      description、mode、prompt、model、permission、steps、color。
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-header slate">
+                <span class="icon">↳</span><span>何时用哪个</span>
+              </div>
+              <div class="panel-body">
+                <div class="item">
+                  <div class="key">Plan</div>
+                  <div class="desc">需求不清、要评审、要先拆方案。</div>
+                </div>
+                <div class="item">
+                  <div class="key">Build</div>
+                  <div class="desc">目标明确，直接实现、修复、重构。</div>
+                </div>
+                <div class="item">
+                  <div class="key">Explore</div>
+                  <div class="desc">先摸底代码库，不想误改文件。</div>
+                </div>
+                <div class="item">
+                  <div class="key">General</div>
+                  <div class="desc">任务大、步骤多、适合拆出去独立完成。</div>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <div class="column">
+            <section class="panel">
+              <div class="panel-header green">
+                <span class="icon">🔧</span><span>扩展、工具与权限</span>
+              </div>
+              <div class="panel-body">
+                <div class="section">
+                  <h3 class="section-title">扩展能力</h3>
+                  <div class="item">
+                    <div class="key">Skills</div>
+                    <div class="desc">
+                      按任务触发的专业工作流，适合调试、设计、验证、图表等场景。
+                    </div>
+                  </div>
+                  <div class="item">
+                    <div class="key">MCP Servers</div>
+                    <div class="desc">
+                      把外部系统或工具接进来，例如数据库、浏览器、第三方服务。
+                    </div>
+                  </div>
+                  <div class="item">
+                    <div class="key">Plugins</div>
+                    <div class="desc">扩展 OpenCode 的工具、集成和行为。</div>
+                  </div>
+                </div>
+                <div class="section">
+                  <h3 class="section-title">内建工具</h3>
+                  <div class="item">
+                    <div class="key">read / glob / grep</div>
+                    <div class="desc">读取文件、搜文件、搜文本。</div>
+                  </div>
+                  <div class="item">
+                    <div class="key">edit / write</div>
+                    <div class="desc">修改与写入文件。</div>
+                  </div>
+                  <div class="item">
+                    <div class="key">bash</div>
+                    <div class="desc">
+                      执行命令，常用于测试、构建、Git、服务启动。
+                    </div>
+                  </div>
+                  <div class="item">
+                    <div class="key">task</div>
+                    <div class="desc">启动子代理，拆分复杂任务。</div>
+                  </div>
+                  <div class="item">
+                    <div class="key">webfetch</div>
+                    <div class="desc">拉取网页内容做研究或文档查询。</div>
+                  </div>
+                </div>
+                <div class="section">
+                  <h3 class="section-title">权限模型</h3>
+                  <div class="item">
+                    <div class="key">allow</div>
+                    <div class="desc">直接允许执行。</div>
+                  </div>
+                  <div class="item">
+                    <div class="key">ask</div>
+                    <div class="desc">执行前向用户确认。</div>
+                  </div>
+                  <div class="item">
+                    <div class="key">deny</div>
+                    <div class="desc">禁止使用对应工具或命令。</div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-header orange">
+                <span class="icon">🚀</span><span>上手路径</span>
+              </div>
+              <div class="panel-body">
+                <div class="item">
+                  <div class="key">1. /init</div>
+                  <div class="desc">
+                    初始化项目规则，生成或改进
+                    <span class="code">AGENTS.md</span>。
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="key">2. 选模式</div>
+                  <div class="desc">先 Plan 想清楚，或直接 Build 干活。</div>
+                </div>
+                <div class="item">
+                  <div class="key">3. 复用命令</div>
+                  <div class="desc">
+                    把高频流程沉淀进
+                    <span class="code">.opencode/commands/</span>。
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="key">4. 控权限</div>
+                  <div class="desc">
+                    用 <span class="code">permission</span> 精细化控制
+                    edit、bash、task。
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="key">5. 接外部能力</div>
+                  <div class="desc">按需加 Skills、MCP、Plugins。</div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+
+        <div class="footerbar">
+          <span class="tag">项目规则：AGENTS.md</span>
+          <span class="tag">项目目录：.opencode/</span>
+          <span class="tag">主代理：Build / Plan</span>
+          <span class="tag">子代理：General / Explore</span>
+          <span class="tag">工具边界：permission</span>
+          <span class="tag">会话结果：share / undo / redo</span>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

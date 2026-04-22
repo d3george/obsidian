@@ -1,6 +1,8 @@
 .obsidian
 .trash
 .DS_Store
+.agents/
+skills-lock.json
 
 
 # 媒体与附件
