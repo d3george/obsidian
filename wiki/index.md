@@ -27,6 +27,7 @@
 
 ### DevOps
 
+- [[git-worktree]] — worktree 全指南：创建三要素、磁盘布局、忽略文件行为、vs stash 取舍
 - [[How Git Works]] — Git 四大区域与代码流转，以及 merge/rebase/squash 三种分支集成策略
 - [[tmux-cheatsheet]] — tmux 高频快捷键速查，覆盖窗口管理、面板分割、复制模式
 - [[掌握Docker的核心概念而非死记命令]] — Docker 核心概念：Image/Container、Dockerfile 缓存、数据持久化、Compose 编排
@@ -58,6 +59,7 @@
 - [[How to Build a Minimum Viable Product (MVP)]] — MVP 三态模型与发布策略
 - [[掌握Docker的核心概念]] — Docker 核心概念系统讲解
 - [[macOS VPN 隧道内网访问方案]] — VM + SSH 隧道 + Clash TUN 精准域名路由方案，附流量流转图
+- [[git-worktrees-arent-the-problem]] — worktree 三个易忽略细节：创建方式、磁盘布局、被忽略文件处理
 
 ## 对比与综合
 
@@ -74,7 +76,7 @@
 
 ## 统计
 
-- 概念笔记：27
-- Raw 来源：9（4 已处理，5 待 ingest）
-- 来源摘要：4
+- 概念笔记：28
+- Raw 来源：9（5 已处理，4 待 ingest）
+- 来源摘要：5
 - 对比/综合：0

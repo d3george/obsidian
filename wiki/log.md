@@ -2,6 +2,13 @@
 
 > Append-only 操作日志。格式：`## [YYYY-MM-DD] 操作类型 | 描述`
 
+## [2026-04-28] ingest | Git worktrees aren't the problem
+- 创建：wiki/sources/git-worktrees-arent-the-problem.md（来源摘要）
+- 更新：wiki/concepts/devops/git-worktree.md（+1 source，新增创建三要素、磁盘布局、忽略文件行为、vs stash 取舍）
+- 更新：wiki/index.md（+1 来源摘要条目、统计更新）
+
+## [2026-04-27] query | git worktree 详解 — 创建概念页 [[git-worktree]]，更新 index.md
+
 ## [2026-04-12] lint | 全库检查，发现 30 个问题，已修复：6 个 AI 概念页死链接（AI概念--上下文→Context、MCP→AI概念--MCP）、4 个视频死链接转为纯文本引用、Brand Guidelines Prompt 拼写修复（sou→source）、6 个页面补充 # 一级标题、22 个概念页补充 frontmatter（created/updated/sources）、创建 wiki/sources/ 目录
 
 ## [2026-04-12] ingest | tmux 简明介绍、How to Build a MVP、掌握Docker的核心概念
