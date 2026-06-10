@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>oh-my-openagent — Agent 调度架构</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'JetBrains Mono', monospace;
+      background: #020617;
+      min-height: 100vh;
+      padding: 2rem;
+      color: white;
+    }
+    .container { max-width: 1280px; margin: 0 auto; }
+    .header { margin-bottom: 2rem; }
+    .header-row { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem; }
+    .pulse-dot {
+      width: 12px; height: 12px;
+      background: #fbbf24;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+    h1 { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.025em; }
+    .subtitle { color: #94a3b8; font-size: 0.875rem; margin-left: 1.75rem; }
+    .diagram-container {
+      background: rgba(15, 23, 42, 0.5);
+      border-radius: 1rem;
+      border: 1px solid #1e293b;
+      padding: 1.5rem;
+      overflow-x: auto;
+    }
+    svg { width: 100%; min-width: 1060px; display: block; }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .card {
+      background: rgba(15, 23, 42, 0.5);
+      border-radius: 0.75rem;
+      border: 1px solid #1e293b;
+      padding: 1.25rem;
+    }
+    .card-header { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; }
+    .card-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .card-dot.cyan    { background: #22d3ee; }
+    .card-dot.emerald { background: #34d399; }
+    .card-dot.violet  { background: #a78bfa; }
+    .card-dot.amber   { background: #fbbf24; }
+    .card-dot.rose    { background: #fb7185; }
+    .card-dot.orange  { background: #fb923c; }
+    .card h3 { font-size: 0.875rem; font-weight: 600; }
+    .card ul { list-style: none; color: #94a3b8; font-size: 0.75rem; }
+    .card li { margin-bottom: 0.4rem; }
+    .footer { text-align: center; margin-top: 1.5rem; color: #475569; font-size: 0.75rem; }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <div class="header-row">
+      <div class="pulse-dot"></div>
+      <h1>oh-my-openagent — Agent 调度架构</h1>
+    </div>
+    <p class="subtitle">Sisyphus 编排器 · 波次并行调度 · 规划流水线 · 会话连续性 · Ralph 循环</p>
+  </div>
+
+  <div class="diagram-container">
+    <!-- viewBox 加高至 980，给各组件更多垂直空间 -->
+    <svg viewBox="0 0 1160 980" font-family="'JetBrains Mono', monospace">
+      <defs>
+        <marker id="arr"       markerWidth="9" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 9 3, 0 6" fill="#64748b"/></marker>
+        <marker id="arr-amber" markerWidth="9" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 9 3, 0 6" fill="#fbbf24"/></marker>
+        <marker id="arr-emr"   markerWidth="9" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 9 3, 0 6" fill="#34d399"/></marker>
+        <marker id="arr-vio"   markerWidth="9" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 9 3, 0 6" fill="#a78bfa"/></marker>
+        <marker id="arr-rose"  markerWidth="9" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 9 3, 0 6" fill="#fb7185"/></marker>
+        <marker id="arr-cyan"  markerWidth="9" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 9 3, 0 6" fill="#22d3ee"/></marker>
+        <marker id="arr-org"   markerWidth="9" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 9 3, 0 6" fill="#fb923c"/></marker>
+        <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+          <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#0f172a" stroke-width="0.8"/>
+        </pattern>
+      </defs>
+
+      <rect width="100%" height="100%" fill="#020617"/>
+      <rect width="100%" height="100%" fill="url(#grid)"/>
+
+      <!-- ─── ARROWS (behind boxes) ─── -->
+
+      <!-- Entry → Sisyphus -->
+      <line x1="390" y1="68" x2="570" y2="68" stroke="#fbbf24" stroke-width="0.7" stroke-dasharray="2,2"/>
+      <line x1="570" y1="68" x2="760" y2="68" stroke="#94a3b8" stroke-width="0.7" stroke-dasharray="2,2"/>
+      <line x1="570" y1="68" x2="570" y2="76" stroke="#fbbf24" stroke-width="1.5" marker-end="url(#arr-amber)"/>
+      <line x1="570" y1="78" x2="570" y2="96" stroke="#fbbf24" stroke-width="1.5" marker-end="url(#arr-amber)"/>
+
+      <!-- Sisyphus → 3 branches (fan-out from y=286) -->
+      <path d="M 295 286 L 175 286 L 175 312" fill="none" stroke="#a78bfa" stroke-width="1.3" marker-end="url(#arr-vio)"/>
+      <line x1="505" y1="286" x2="505" y2="312" stroke="#34d399" stroke-width="1.3" marker-end="url(#arr-emr)"/>
+      <path d="M 840" y1="286 L 975 286 L 975 312" fill="none" stroke="#fbbf24" stroke-width="1.3" marker-end="url(#arr-amber)"/>
+
+      <!-- Sisyphus fan-out fix (use path for right branch) -->
+      <path d="M 840 286 L 975 286 L 975 312" fill="none" stroke="#fbbf24" stroke-width="1.3" marker-end="url(#arr-amber)"/>
+
+      <!-- Planning pipeline internal -->
+      <line x1="175" y1="392" x2="175" y2="415" stroke="#a78bfa" stroke-width="1.2" marker-end="url(#arr-vio)"/>
+      <line x1="175" y1="483" x2="175" y2="506" stroke="#a78bfa" stroke-width="1.2" marker-end="url(#arr-vio)"/>
+      <line x1="175" y1="574" x2="175" y2="597" stroke="#a78bfa" stroke-width="1.2" marker-end="url(#arr-vio)"/>
+
+      <!-- Wave 1 → Wave 2 -->
+      <line x1="403" y1="388" x2="403" y2="413" stroke="#34d399" stroke-width="0.8" stroke-dasharray="3,3"/>
+      <line x1="577" y1="388" x2="577" y2="413" stroke="#34d399" stroke-width="0.8" stroke-dasharray="3,3"/>
+      <!-- Wave 2 → Direct -->
+      <line x1="403" y1="483" x2="403" y2="508" stroke="#94a3b8" stroke-width="0.8" stroke-dasharray="3,3"/>
+      <line x1="577" y1="483" x2="577" y2="508" stroke="#94a3b8" stroke-width="0.8" stroke-dasharray="3,3"/>
+      <!-- Direct → BG Mgmt -->
+      <line x1="490" y1="576" x2="490" y2="600" stroke="#fb923c" stroke-width="1" marker-end="url(#arr-org)"/>
+
+      <!-- BG loop back (left side) -->
+      <path d="M 270 655 L 24 655 L 24 196 L 68 196"
+            fill="none" stroke="#fb923c" stroke-width="1.2" stroke-dasharray="5,3"
+            marker-end="url(#arr-org)"/>
+      <text x="16" y="426" fill="#fb923c" font-size="7" text-anchor="middle" transform="rotate(-90,16,426)">system-reminder 通知</text>
+
+      <!-- Ralph loop back (right side) -->
+      <path d="M 820 850 L 1140 850 L 1140 196 L 1092 196"
+            fill="none" stroke="#fb923c" stroke-width="1" stroke-dasharray="5,3"
+            marker-end="url(#arr-org)"/>
+      <text x="1148" y="430" fill="#fb923c" font-size="7" text-anchor="middle" transform="rotate(90,1148,430)">循环直到 100% 完成</text>
+
+      <!-- Convergence to Synthesize (y=760) -->
+      <path d="M 175 675 L 175 725 L 350 745" fill="none" stroke="#a78bfa" stroke-width="1" marker-end="url(#arr-vio)"/>
+      <line x1="490" y1="685" x2="490" y2="738" stroke="#fb923c" stroke-width="1" marker-end="url(#arr-org)"/>
+      <path d="M 975 675 L 975 725 L 820 745" fill="none" stroke="#fbbf24" stroke-width="1" marker-end="url(#arr-amber)"/>
+
+      <!-- Synthesize → Ralph Loop -->
+      <line x1="585" y1="808" x2="585" y2="828" stroke="#fb923c" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arr-org)"/>
+
+      <!-- Ralph Loop → User Response -->
+      <line x1="585" y1="878" x2="585" y2="900" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr)"/>
+
+
+      <!-- ─── ENTRY POINTS ─── -->
+
+      <!-- /ultrawork -->
+      <rect x="295" y="16" width="188" height="56" rx="6" fill="#0f172a"/>
+      <rect x="295" y="16" width="188" height="56" rx="6" fill="rgba(120,53,15,0.32)" stroke="#fbbf24" stroke-width="1.5"/>
+      <text x="389" y="36" fill="white"   font-size="9"   font-weight="600" text-anchor="middle">/ultrawork · /ulw</text>
+      <text x="389" y="51" fill="#fbbf24" font-size="7.5" text-anchor="middle">完整编排触发器</text>
+      <text x="389" y="64" fill="#94a3b8" font-size="7"   text-anchor="middle">ultrawork-mode · SISYPHUS</text>
+
+      <!-- /start-work -->
+      <rect x="496" y="16" width="180" height="56" rx="6" fill="#0f172a"/>
+      <rect x="496" y="16" width="180" height="56" rx="6" fill="rgba(76,29,149,0.35)" stroke="#a78bfa" stroke-width="1.5"/>
+      <text x="586" y="36" fill="white"   font-size="9"   font-weight="600" text-anchor="middle">/start-work</text>
+      <text x="586" y="51" fill="#a78bfa" font-size="7.5" text-anchor="middle">Prometheus 访谈模式</text>
+      <text x="586" y="64" fill="#94a3b8" font-size="7"   text-anchor="middle">先策略规划</text>
+
+      <!-- task() -->
+      <rect x="690" y="16" width="180" height="56" rx="6" fill="#0f172a"/>
+      <rect x="690" y="16" width="180" height="56" rx="6" fill="rgba(30,41,59,0.55)" stroke="#94a3b8" stroke-width="1.5"/>
+      <text x="780" y="36" fill="white"   font-size="9"   font-weight="600" text-anchor="middle">task() tool</text>
+      <text x="780" y="51" fill="#94a3b8" font-size="7.5" text-anchor="middle">程序化调度</text>
+      <text x="780" y="64" fill="#64748b" font-size="7"   text-anchor="middle">category + load_skills=[...]</text>
+
+      <!-- ─── SISYPHUS REGION ─── -->
+      <rect x="68" y="96" width="1024" height="190" rx="12" fill="rgba(120,53,15,0.06)" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="8,4"/>
+      <text x="580" y="116" fill="#fbbf24" font-size="12" font-weight="700" text-anchor="middle">SISYPHUS  编排器</text>
+      <text x="580" y="132" fill="#92400e" font-size="7.5" text-anchor="middle">oh-my-openagent Plugin · Claude Opus 4.7 · 默认偏向委托 · 绝不独自实现</text>
+
+      <!-- ① IntentGate -->
+      <rect x="86" y="142" width="190" height="76" rx="5" fill="#0f172a"/>
+      <rect x="86" y="142" width="190" height="76" rx="5" fill="rgba(120,53,15,0.38)" stroke="#fbbf24" stroke-width="1"/>
+      <text x="181" y="161" fill="white"   font-size="8.5" font-weight="600" text-anchor="middle">① 意图识别门</text>
+      <text x="181" y="176" fill="#fbbf24" font-size="7.5" text-anchor="middle">每条消息强制执行</text>
+      <text x="181" y="190" fill="#94a3b8" font-size="7"   text-anchor="middle">research · implement · fix · explore</text>
+      <text x="181" y="203" fill="#64748b" font-size="6.5" text-anchor="middle">轮次局部重置，不继承上轮模式</text>
+
+      <!-- ② Classify -->
+      <rect x="288" y="142" width="192" height="76" rx="5" fill="#0f172a"/>
+      <rect x="288" y="142" width="192" height="76" rx="5" fill="rgba(120,53,15,0.38)" stroke="#fbbf24" stroke-width="1"/>
+      <text x="384" y="161" fill="white"   font-size="8.5" font-weight="600" text-anchor="middle">② 分类 + 歧义检测</text>
+      <text x="384" y="176" fill="#fbbf24" font-size="7.5" text-anchor="middle">Trivial · Complex · Ambiguous</text>
+      <text x="384" y="190" fill="#94a3b8" font-size="7"   text-anchor="middle">外部库→librarian · 多模块→explore</text>
+      <text x="384" y="203" fill="#64748b" font-size="6.5" text-anchor="middle">存在计划文件→momus · 不清楚先问</text>
+
+      <!-- ③ Decompose -->
+      <rect x="492" y="142" width="198" height="76" rx="5" fill="#0f172a"/>
+      <rect x="492" y="142" width="198" height="76" rx="5" fill="rgba(120,53,15,0.38)" stroke="#fbbf24" stroke-width="1"/>
+      <text x="591" y="161" fill="white"   font-size="8.5" font-weight="600" text-anchor="middle">③ 分解 + 波次规划</text>
+      <text x="591" y="176" fill="#fbbf24" font-size="7.5" text-anchor="middle">构建依赖图谱</text>
+      <text x="591" y="190" fill="#94a3b8" font-size="7"   text-anchor="middle">任务分组 → 并行波次执行</text>
+      <text x="591" y="203" fill="#64748b" font-size="6.5" text-anchor="middle">Todo 列表 · 关键路径追踪</text>
+
+      <!-- ④ Delegation -->
+      <rect x="702" y="142" width="196" height="76" rx="5" fill="#0f172a"/>
+      <rect x="702" y="142" width="196" height="76" rx="5" fill="rgba(120,53,15,0.38)" stroke="#fbbf24" stroke-width="1"/>
+      <text x="800" y="161" fill="white"   font-size="8.5" font-weight="600" text-anchor="middle">④ 委托检查</text>
+      <text x="800" y="176" fill="#fbbf24" font-size="7.5" text-anchor="middle">有专家？→ 立即委托</text>
+      <text x="800" y="190" fill="#94a3b8" font-size="7"   text-anchor="middle">选择 category + load_skills</text>
+      <text x="800" y="203" fill="#64748b" font-size="6.5" text-anchor="middle">实现前必须通过上下文完整性门</text>
+
+      <!-- ⑤ Verify -->
+      <rect x="910" y="142" width="174" height="76" rx="5" fill="#0f172a"/>
+      <rect x="910" y="142" width="174" height="76" rx="5" fill="rgba(120,53,15,0.38)" stroke="#fbbf24" stroke-width="1"/>
+      <text x="997" y="161" fill="white"   font-size="8.5" font-weight="600" text-anchor="middle">⑤ 强制 + 验证</text>
+      <text x="997" y="176" fill="#fbbf24" font-size="7.5" text-anchor="middle">完成后立即标记 Todo</text>
+      <text x="997" y="190" fill="#94a3b8" font-size="7"   text-anchor="middle">lsp · build · 手动 QA</text>
+      <text x="997" y="203" fill="#64748b" font-size="6.5" text-anchor="middle">先有证据，再声称完成</text>
+
+      <!-- Branch section labels -->
+      <text x="175"  y="300" fill="#a78bfa" font-size="8"   font-weight="700" text-anchor="middle">规划流水线</text>
+      <text x="505"  y="300" fill="#34d399" font-size="8"   font-weight="700" text-anchor="middle">并行波次调度</text>
+      <text x="975"  y="300" fill="#fbbf24" font-size="8"   font-weight="700" text-anchor="middle">分类 → 模型路由</text>
+
+
+      <!-- ─── LEFT: PLANNING PIPELINE ─── -->
+
+      <!-- Prometheus -->
+      <rect x="88" y="312" width="176" height="80" rx="6" fill="#0f172a"/>
+      <rect x="88" y="312" width="176" height="80" rx="6" fill="rgba(76,29,149,0.42)" stroke="#a78bfa" stroke-width="1.5"/>
+      <text x="176" y="332" fill="white"   font-size="10"  font-weight="600" text-anchor="middle">Prometheus</text>
+      <text x="176" y="348" fill="#a78bfa" font-size="8"   text-anchor="middle">战略规划师</text>
+      <text x="176" y="362" fill="#94a3b8" font-size="7.5" text-anchor="middle">访谈模式 · 迭代问答</text>
+      <text x="176" y="376" fill="#64748b" font-size="7"   text-anchor="middle">依赖图 · 波次计划 · Claude Opus 4.7</text>
+      <text x="176" y="388" fill="#64748b" font-size="7"   text-anchor="middle">输出 .sisyphus/plans/*.md</text>
+
+      <!-- Metis -->
+      <rect x="88" y="415" width="176" height="68" rx="6" fill="#0f172a"/>
+      <rect x="88" y="415" width="176" height="68" rx="6" fill="rgba(76,29,149,0.42)" stroke="#a78bfa" stroke-width="1.5"/>
+      <text x="176" y="435" fill="white"   font-size="10"  font-weight="600" text-anchor="middle">Metis</text>
+      <text x="176" y="451" fill="#a78bfa" font-size="8"   text-anchor="middle">预规划顾问</text>
+      <text x="176" y="465" fill="#94a3b8" font-size="7.5" text-anchor="middle">识别隐藏意图 · AI 失效点</text>
+      <text x="176" y="478" fill="#64748b" font-size="7"   text-anchor="middle">早期消除歧义</text>
+
+      <!-- Momus -->
+      <rect x="88" y="506" width="176" height="68" rx="6" fill="#0f172a"/>
+      <rect x="88" y="506" width="176" height="68" rx="6" fill="rgba(76,29,149,0.42)" stroke="#a78bfa" stroke-width="1.5"/>
+      <text x="176" y="526" fill="white"   font-size="10"  font-weight="600" text-anchor="middle">Momus</text>
+      <text x="176" y="542" fill="#a78bfa" font-size="8"   text-anchor="middle">计划审阅者 · 批评者</text>
+      <text x="176" y="556" fill="#94a3b8" font-size="7.5" text-anchor="middle">清晰度 · 可验证性 · 完整性</text>
+      <text x="176" y="568" fill="#64748b" font-size="7"   text-anchor="middle">GPT-5.4 · 计划后验证</text>
+
+      <!-- Atlas -->
+      <rect x="88" y="597" width="176" height="68" rx="6" fill="#0f172a"/>
+      <rect x="88" y="597" width="176" height="68" rx="6" fill="rgba(76,29,149,0.42)" stroke="#a78bfa" stroke-width="1.5"/>
+      <text x="176" y="617" fill="white"   font-size="10"  font-weight="600" text-anchor="middle">Atlas</text>
+      <text x="176" y="633" fill="#a78bfa" font-size="8"   text-anchor="middle">Todo 执行者</text>
+      <text x="176" y="647" fill="#94a3b8" font-size="7.5" text-anchor="middle">按波次逐步执行</text>
+      <text x="176" y="660" fill="#64748b" font-size="7"   text-anchor="middle">不可再委托 · Claude Sonnet 4.6</text>
+
+
+      <!-- ─── CENTER: PARALLEL WAVE DISPATCH ─── -->
+
+      <!-- Wave 1 labels -->
+      <text x="403" y="303" fill="#34d399" font-size="7.5" font-weight="600" text-anchor="middle">WAVE 1 — 后台并行</text>
+      <text x="577" y="303" fill="#34d399" font-size="7.5" font-weight="600" text-anchor="middle">run_in_background=true</text>
+
+      <!-- explore × N -->
+      <rect x="323" y="312" width="162" height="76" rx="6" fill="#0f172a"/>
+      <rect x="323" y="312" width="162" height="76" rx="6" fill="rgba(6,78,59,0.42)" stroke="#34d399" stroke-width="1.5"/>
+      <text x="404" y="332" fill="white"   font-size="10"  font-weight="600" text-anchor="middle">explore × N</text>
+      <text x="404" y="348" fill="#34d399" font-size="8"   text-anchor="middle">代码库 Grep</text>
+      <text x="404" y="362" fill="#94a3b8" font-size="7.5" text-anchor="middle">模式 · 文件路径 · 风格</text>
+      <text x="404" y="374" fill="#64748b" font-size="7"   text-anchor="middle">免费 · GPT-5.4-mini-fast</text>
+      <text x="404" y="384" fill="#64748b" font-size="6.5" text-anchor="middle">委托后禁止重复搜索</text>
+
+      <!-- librarian × N -->
+      <rect x="497" y="312" width="162" height="76" rx="6" fill="#0f172a"/>
+      <rect x="497" y="312" width="162" height="76" rx="6" fill="rgba(6,78,59,0.42)" stroke="#34d399" stroke-width="1.5"/>
+      <text x="578" y="332" fill="white"   font-size="10"  font-weight="600" text-anchor="middle">librarian × N</text>
+      <text x="578" y="348" fill="#34d399" font-size="8"   text-anchor="middle">文档 · 开源示例</text>
+      <text x="578" y="362" fill="#94a3b8" font-size="7.5" text-anchor="middle">库 API · 最佳实践</text>
+      <text x="578" y="374" fill="#64748b" font-size="7"   text-anchor="middle">便宜 · GPT-5.4-mini-fast</text>
+      <text x="578" y="384" fill="#64748b" font-size="6.5" text-anchor="middle">外部引用专用</text>
+
+      <!-- Wave 2 labels -->
+      <text x="403" y="408" fill="#fb7185" font-size="7.5" font-weight="600" text-anchor="middle">WAVE 2 — 并行同步</text>
+      <text x="577" y="408" fill="#22d3ee" font-size="7.5" font-weight="600" text-anchor="middle">或后台</text>
+
+      <!-- Oracle -->
+      <rect x="323" y="413" width="162" height="70" rx="6" fill="#0f172a"/>
+      <rect x="323" y="413" width="162" height="70" rx="6" fill="rgba(136,19,55,0.42)" stroke="#fb7185" stroke-width="1.5"/>
+      <text x="404" y="433" fill="white"   font-size="10"  font-weight="600" text-anchor="middle">Oracle</text>
+      <text x="404" y="449" fill="#fb7185" font-size="8"   text-anchor="middle">只读 · 高智能推理</text>
+      <text x="404" y="463" fill="#94a3b8" font-size="7.5" text-anchor="middle">架构决策 · 复杂调试</text>
+      <text x="404" y="475" fill="#64748b" font-size="7"   text-anchor="middle">昂贵 · GPT-5.4 · 阻塞实现</text>
+
+      <!-- Hephaestus -->
+      <rect x="497" y="413" width="162" height="70" rx="6" fill="#0f172a"/>
+      <rect x="497" y="413" width="162" height="70" rx="6" fill="rgba(8,51,68,0.45)" stroke="#22d3ee" stroke-width="1.5"/>
+      <text x="578" y="433" fill="white"   font-size="10"  font-weight="600" text-anchor="middle">Hephaestus</text>
+      <text x="578" y="449" fill="#22d3ee" font-size="8"   text-anchor="middle">深度自治执行者</text>
+      <text x="578" y="463" fill="#94a3b8" font-size="7.5" text-anchor="middle">目标导向 · 完整工具链</text>
+      <text x="578" y="475" fill="#64748b" font-size="7"   text-anchor="middle">GPT-5.4 · 长耗时任务</text>
+
+      <!-- Direct Tools label -->
+      <text x="490" y="502" fill="#94a3b8" font-size="7.5" font-weight="600" text-anchor="middle">直接执行（无需委托）</text>
+
+      <!-- Direct Tools -->
+      <rect x="405" y="508" width="170" height="68" rx="6" fill="#0f172a"/>
+      <rect x="405" y="508" width="170" height="68" rx="6" fill="rgba(30,41,59,0.55)" stroke="#94a3b8" stroke-width="1.5"/>
+      <text x="490" y="528" fill="white"   font-size="10"  font-weight="600" text-anchor="middle">直接工具</text>
+      <text x="490" y="544" fill="#94a3b8" font-size="8"   text-anchor="middle">grep · read/edit · bash</text>
+      <text x="490" y="558" fill="#94a3b8" font-size="7.5" text-anchor="middle">lsp_diagnostics · ast_grep</text>
+      <text x="490" y="570" fill="#64748b" font-size="7"   text-anchor="middle">单文件 · 已知位置</text>
+
+      <!-- Background Task Management -->
+      <rect x="272" y="600" width="466" height="85" rx="8" fill="#0f172a"/>
+      <rect x="272" y="600" width="466" height="85" rx="8" fill="rgba(251,146,60,0.14)" stroke="#fb923c" stroke-width="1.2"/>
+      <text x="505" y="620" fill="#fb923c" font-size="9"   font-weight="600" text-anchor="middle">后台任务管理</text>
+      <text x="505" y="638" fill="#94a3b8" font-size="8"   text-anchor="middle">① task(run_in_background=true) → 返回 task_id</text>
+      <text x="505" y="654" fill="#94a3b8" font-size="8"   text-anchor="middle">② 等待 system-reminder 通知（不得轮询）</text>
+      <text x="505" y="669" fill="#94a3b8" font-size="8"   text-anchor="middle">③ background_output(task_id) 收集 · cancel(taskId) 清理</text>
+      <text x="505" y="681" fill="#64748b" font-size="6.5" text-anchor="middle">收到通知前结束响应 · 不得提前轮询</text>
+
+
+      <!-- ─── RIGHT: CATEGORY → MODEL ROUTING ─── -->
+
+      <rect x="762" y="312" width="360" height="363" rx="8" fill="#0f172a"/>
+      <rect x="762" y="312" width="360" height="363" rx="8" fill="rgba(120,53,15,0.18)" stroke="#fbbf24" stroke-width="1.2"/>
+      <text x="942" y="332" fill="#fbbf24" font-size="9"   font-weight="600" text-anchor="middle">task(category=..., load_skills=[...])</text>
+      <text x="942" y="347" fill="#92400e" font-size="7.5" text-anchor="middle">→ Sisyphus-Junior（不可再委托 → 防∞循环）</text>
+      <line x1="770" y1="355" x2="1114" y2="355" stroke="#1e293b" stroke-width="0.8"/>
+
+      <text x="774" y="372" fill="#22d3ee"  font-size="8.5" font-weight="600">visual-engineering</text>
+      <text x="968" y="372" fill="#94a3b8"  font-size="7.5">→ Gemini 3.1 Pro</text>
+
+      <text x="774" y="392" fill="#fb7185"  font-size="8.5" font-weight="600">ultrabrain</text>
+      <text x="968" y="392" fill="#94a3b8"  font-size="7.5">→ GPT-5.4  (xhigh)</text>
+
+      <text x="774" y="412" fill="#34d399"  font-size="8.5" font-weight="600">deep</text>
+      <text x="968" y="412" fill="#94a3b8"  font-size="7.5">→ GPT-5.4  (medium)</text>
+
+      <text x="774" y="432" fill="#fb923c"  font-size="8.5" font-weight="600">artistry</text>
+      <text x="968" y="432" fill="#94a3b8"  font-size="7.5">→ Gemini 3.1 Pro (high)</text>
+
+      <text x="774" y="452" fill="#a78bfa"  font-size="8.5" font-weight="600">quick</text>
+      <text x="968" y="452" fill="#94a3b8"  font-size="7.5">→ GPT-5.4-mini</text>
+
+      <text x="774" y="472" fill="#fbbf24"  font-size="8.5" font-weight="600">unspecified-high</text>
+      <text x="968" y="472" fill="#94a3b8"  font-size="7.5">→ Claude Opus 4.7 (max)</text>
+
+      <text x="774" y="492" fill="#94a3b8"  font-size="8.5" font-weight="600">unspecified-low</text>
+      <text x="968" y="492" fill="#94a3b8"  font-size="7.5">→ Claude Sonnet 4.6</text>
+
+      <text x="774" y="512" fill="#64748b"  font-size="8.5" font-weight="600">writing</text>
+      <text x="968" y="512" fill="#94a3b8"  font-size="7.5">→ Gemini 3 Flash</text>
+
+      <line x1="770" y1="522" x2="1114" y2="522" stroke="#1e293b" stroke-width="0.8"/>
+
+      <!-- Session continuity -->
+      <text x="942" y="539" fill="#fbbf24" font-size="8"   font-weight="600" text-anchor="middle">会话连续性（task_id）</text>
+      <text x="942" y="555" fill="#94a3b8" font-size="7.5" text-anchor="middle">每次调用返回 task_id → 后续必须复用</text>
+      <text x="942" y="569" fill="#94a3b8" font-size="7.5" text-anchor="middle">失败任务 → task(task_id=..., prompt="修复: ...")</text>
+      <text x="942" y="582" fill="#64748b" font-size="7"   text-anchor="middle">节省 70%+ token · 完整上下文保留</text>
+
+      <line x1="770" y1="592" x2="1114" y2="592" stroke="#1e293b" stroke-width="0.8"/>
+
+      <text x="942" y="607" fill="#fbbf24" font-size="7.5" font-weight="600" text-anchor="middle">+ load_skills=[...] 注入技能 MCP</text>
+      <text x="942" y="621" fill="#94a3b8" font-size="7"   text-anchor="middle">playwright · git-master · frontend-ui-ux</text>
+      <text x="942" y="635" fill="#94a3b8" font-size="7"   text-anchor="middle">review-work · tdd · systematic-debugging</text>
+      <text x="942" y="648" fill="#64748b" font-size="6.5" text-anchor="middle">技能嵌入 MCP：任务前自动启动 → 结束后销毁</text>
+      <text x="942" y="660" fill="#64748b" font-size="6.5" text-anchor="middle">三层 MCP：built-in · claude-code · skill</text>
+      <text x="942" y="672" fill="#64748b" font-size="6.5" text-anchor="middle">用户安装技能优先级高于内置默认</text>
+
+
+      <!-- ─── VERIFY & SYNTHESIZE ─── -->
+      <rect x="350" y="748" width="480" height="60" rx="6" fill="#0f172a"/>
+      <rect x="350" y="748" width="480" height="60" rx="6" fill="rgba(8,51,68,0.42)" stroke="#22d3ee" stroke-width="1.5"/>
+      <text x="590" y="769" fill="white"   font-size="10"  font-weight="600" text-anchor="middle">验证 &amp; 综合</text>
+      <text x="590" y="784" fill="#22d3ee" font-size="8"   text-anchor="middle">lsp_diagnostics · build (exit 0) · 测试通过 · 手动 QA</text>
+      <text x="590" y="798" fill="#94a3b8" font-size="7.5" text-anchor="middle">所有 TODO 完成 · 必须有证据 · 不接受部分交付 · 已有问题单独标注</text>
+
+      <!-- ─── RALPH LOOP ─── -->
+      <rect x="350" y="828" width="480" height="50" rx="6" fill="#0f172a"/>
+      <rect x="350" y="828" width="480" height="50" rx="6" fill="rgba(251,146,60,0.1)" stroke="#fb923c" stroke-width="1" stroke-dasharray="6,3"/>
+      <text x="590" y="849" fill="#fb923c" font-size="9"   font-weight="600" text-anchor="middle">Ralph Loop  (/ulw-loop)</text>
+      <text x="590" y="866" fill="#94a3b8" font-size="7.5" text-anchor="middle">自引用循环 · 持续回到 Sisyphus 直到 100% 完成 · 非循环任务执行一次后退出</text>
+
+      <!-- ─── USER RESPONSE ─── -->
+      <rect x="505" y="900" width="170" height="56" rx="6" fill="#0f172a"/>
+      <rect x="505" y="900" width="170" height="56" rx="6" fill="rgba(30,41,59,0.55)" stroke="#94a3b8" stroke-width="1.5"/>
+      <text x="590" y="922" fill="white"   font-size="11"  font-weight="600" text-anchor="middle">用户响应</text>
+      <text x="590" y="940" fill="#94a3b8" font-size="9"   text-anchor="middle">最终答案 · 输出结果</text>
+
+      <!-- ─── LEGEND ─── -->
+      <text x="50"  y="968" fill="#475569" font-size="7.5" font-weight="600">图例：</text>
+      <rect x="103"  y="961" width="9" height="6" rx="1" fill="rgba(120,53,15,0.38)"  stroke="#fbbf24"  stroke-width="0.7"/>
+      <text x="117"  y="968" fill="#94a3b8" font-size="7">编排器</text>
+      <rect x="170"  y="961" width="9" height="6" rx="1" fill="rgba(6,78,59,0.42)"    stroke="#34d399"  stroke-width="0.7"/>
+      <text x="184"  y="968" fill="#94a3b8" font-size="7">研究 / 探索</text>
+      <rect x="250"  y="961" width="9" height="6" rx="1" fill="rgba(76,29,149,0.42)"  stroke="#a78bfa"  stroke-width="0.7"/>
+      <text x="264"  y="968" fill="#94a3b8" font-size="7">规划</text>
+      <rect x="305"  y="961" width="9" height="6" rx="1" fill="rgba(136,19,55,0.42)"  stroke="#fb7185"  stroke-width="0.7"/>
+      <text x="319"  y="968" fill="#94a3b8" font-size="7">Oracle</text>
+      <rect x="368"  y="961" width="9" height="6" rx="1" fill="rgba(8,51,68,0.45)"    stroke="#22d3ee"  stroke-width="0.7"/>
+      <text x="382"  y="968" fill="#94a3b8" font-size="7">深度执行者</text>
+      <rect x="450"  y="961" width="9" height="6" rx="1" fill="rgba(30,41,59,0.55)"   stroke="#94a3b8"  stroke-width="0.7"/>
+      <text x="464"  y="968" fill="#94a3b8" font-size="7">直接工具</text>
+      <rect x="528"  y="961" width="9" height="6" rx="1" fill="rgba(251,146,60,0.14)" stroke="#fb923c"  stroke-width="0.7"/>
+      <text x="542"  y="968" fill="#94a3b8" font-size="7">异步 / 后台</text>
+      <line x1="610" y1="964" x2="625" y2="964" stroke="#fb923c" stroke-width="1" stroke-dasharray="3,2"/>
+      <text x="630"  y="968" fill="#94a3b8" font-size="7">循环 / 反馈</text>
+
+    </svg>
+  </div>
+
+  <!-- Info Cards (中文) -->
+  <div class="cards">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-dot amber"></div>
+        <h3>Sisyphus：编排规则</h3>
+      </div>
+      <ul>
+        <li>• 默认偏向委托 — 绝不单独工作</li>
+        <li>• 意图识别门每条消息强制执行（轮次局部重置）</li>
+        <li>• 通过依赖图进行波次并行执行</li>
+        <li>• 实现前必须通过上下文完整性门</li>
+        <li>• 遇到不良设计先提出挑战，给出替代方案</li>
+        <li>• 无开场白 — 直接开始工作</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-dot emerald"></div>
+        <h3>Agent 调度原则</h3>
+      </div>
+      <ul>
+        <li>• explore / librarian：始终后台 + 并行（10+ 个）</li>
+        <li>• oracle：只读，昂贵，结果出来前阻塞实现</li>
+        <li>• Prometheus：非平凡任务（2+ 步）通过 /start-work</li>
+        <li>• 反重复：绝不重复已委托的搜索</li>
+        <li>• task_id：后续跟进必须复用（节省 70%+ token）</li>
+        <li>• Sisyphus-Junior：不可再委托 → 防止无限循环</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-dot orange"></div>
+        <h3>后台循环与验证</h3>
+      </div>
+      <ul>
+        <li>• 后台 Agent：派发 → 等待 system-reminder 通知</li>
+        <li>• 收到通知前绝不轮询 background_output</li>
+        <li>• 每次文件修改后运行 lsp_diagnostics</li>
+        <li>• 构建必须退出码为 0 — 手动 QA 不可省略</li>
+        <li>• Ralph Loop (/ulw-loop)：循环直到 100% 完成</li>
+        <li>• 绝不删除失败测试来让构建通过</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="footer">
+    oh-my-openagent · github.com/code-yeongyu/oh-my-openagent · Agent 调度架构 · 2026
+  </p>
+</div>
+</body>
+</html>
